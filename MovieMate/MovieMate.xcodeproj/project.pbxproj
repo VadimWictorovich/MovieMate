@@ -56,15 +56,23 @@
 		6CCA99592B09323A00E4A975 /* MovieMate */ = {
 			isa = PBXGroup;
 			children = (
-				6CCA995A2B09323A00E4A975 /* AppDelegate.swift */,
-				6CCA995C2B09323A00E4A975 /* SceneDelegate.swift */,
 				6CCA995E2B09323A00E4A975 /* ViewController.swift */,
 				6CCA99602B09323A00E4A975 /* Main.storyboard */,
 				6CCA99632B09324100E4A975 /* Assets.xcassets */,
 				6CCA99652B09324100E4A975 /* LaunchScreen.storyboard */,
 				6CCA99682B09324100E4A975 /* Info.plist */,
+				6CCA996E2B09332A00E4A975 /* AppDelegate */,
 			);
 			path = MovieMate;
+			sourceTree = "<group>";
+		};
+		6CCA996E2B09332A00E4A975 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA995A2B09323A00E4A975 /* AppDelegate.swift */,
+				6CCA995C2B09323A00E4A975 /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
