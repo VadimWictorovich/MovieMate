@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,19 +24,20 @@
                                     <constraint firstAttribute="width" constant="350" id="zFa-o2-QrS"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MovieMate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOv-JG-feJ">
-                                <rect key="frame" x="120" y="621" width="153" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MovieMate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOv-JG-feJ">
+                                <rect key="frame" x="120.33333333333333" y="618.66666666666663" width="152.33333333333337" height="33.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="30"/>
-                                <color key="textColor" systemColor="systemPinkColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="SOv-JG-feJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DYk-JC-A7a"/>
                             <constraint firstItem="TMZ-MR-vPS" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="TWo-jb-bac"/>
                             <constraint firstItem="TMZ-MR-vPS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="fjf-pD-RfD"/>
+                            <constraint firstItem="SOv-JG-feJ" firstAttribute="top" secondItem="TMZ-MR-vPS" secondAttribute="bottom" constant="5" id="mmY-nP-5Ny"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -48,8 +48,5 @@
     </scenes>
     <resources>
         <image name="логотип" width="1024" height="1024"/>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
