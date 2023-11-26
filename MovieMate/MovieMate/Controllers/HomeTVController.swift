@@ -28,6 +28,8 @@ class HomeTVController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(FirstCollectionInTVC.self, forCellReuseIdentifier: "cellInCollection1")
     }
 
     // MARK: - Table view data source
@@ -54,10 +56,22 @@ class HomeTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let but = buttonNamed[indexPath.row]
-        cell.textLabel?.text = but.rawValue
-        return cell
+        switch sectionNamed[indexPath.section] {
+        case .rootSection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let but = buttonNamed[indexPath.row]
+            cell.textLabel?.text = but.rawValue
+            return cell
+        case .bestForYearSection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection1", for: indexPath) as! FirstCollectionInTVC
+            
+            return cell
+        case .bestAllTimeSection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let but = buttonNamed[indexPath.row]
+            cell.textLabel?.text = but.rawValue
+            return cell
+        }
     }
 
     /*
@@ -86,3 +100,5 @@ class HomeTVController: UITableViewController {
     */
 
 }
+
+
