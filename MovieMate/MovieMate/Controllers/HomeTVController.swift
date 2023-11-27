@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 enum NameSection: String, CaseIterable {
     case rootSection = "Главное меню"
     case bestForYearSection = "Лучшее за 2023 год"
@@ -41,6 +40,10 @@ class HomeTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         sectionNamed[section].rawValue
     }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch sectionNamed[section] {
@@ -61,10 +64,11 @@ class HomeTVController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             let but = buttonNamed[indexPath.row]
             cell.textLabel?.text = but.rawValue
+            cell.textLabel?.textColor = .white
+            
             return cell
         case .bestForYearSection:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection1", for: indexPath) as! FirstCollectionInTVC
-            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection1", for: indexPath) as? FirstCollectionInTVC else { return UITableViewCell() }
             return cell
         case .bestAllTimeSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -73,32 +77,18 @@ class HomeTVController: UITableViewController {
             return cell
         }
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch sectionNamed[indexPath.section] {
+        case .rootSection:
+            return 60.0
+        case .bestForYearSection:
+            return 200.0
+        case .bestAllTimeSection:
+            return 200.0
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 

@@ -12,38 +12,19 @@ final class FirstCollectionInTVC: UITableViewCell {
     private var collectionView: UICollectionView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setupCollectionView()
-        }
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-            setupCollectionView()
-        }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
-        //setupCollectionView()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-    
-    private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: contentView.frame, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .green
-        
-        addSubview(collectionView)
-        
+        collectionView.backgroundColor = .darkGray
+
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell1")
+        contentView.addSubview(collectionView)
+
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -52,18 +33,27 @@ final class FirstCollectionInTVC: UITableViewCell {
         ])
     }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+       }
 }
 
-extension FirstCollectionInTVC: UICollectionViewDataSource, UICollectionViewDelegate {
+extension FirstCollectionInTVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
-        cell.backgroundColor = .red
-
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
+        cell.backgroundColor = .black
+        cell.imageView.image = UIImage(named: "логотип")
+        cell.label.text = "Название фильма"
+        cell.label.textColor = .white
         return cell
-
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: 150, height: 190)
+        }
 }
