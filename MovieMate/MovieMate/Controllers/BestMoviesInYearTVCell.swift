@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol PushToVC: AnyObject {
+    func didSelectCell(at indexPath: IndexPath)
+}
+
 final class BestMoviesInYearTVCell: UITableViewCell {
     
+    weak var delegate: PushToVC?
     private var collectionView: UICollectionView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,5 +61,9 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             return CGSize(width: 150, height: 190)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectCell(at: indexPath)
     }
 }

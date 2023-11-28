@@ -42,6 +42,47 @@
             </objects>
             <point key="canvasLocation" x="700" y="-156"/>
         </scene>
+        <!--DetailVC-->
+        <scene sceneID="Wmq-2r-s80">
+            <objects>
+                <viewController id="uRp-ID-cpQ" customClass="DetailVC" customModule="MovieMate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uHu-hR-zJm">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="изображение по умолчанию" translatesAutoresizingMaskIntoConstraints="NO" id="vV1-C5-Rnn">
+                                <rect key="frame" x="0.0" y="59" width="393" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="600" id="cOk-eW-1XJ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKu-5q-fr5">
+                                <rect key="frame" x="156.66666666666666" y="709" width="80" height="99"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="53G-YS-xGi"/>
+                        <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dKu-5q-fr5" firstAttribute="top" secondItem="vV1-C5-Rnn" secondAttribute="bottom" constant="50" id="3Hi-UH-IJW"/>
+                            <constraint firstItem="dKu-5q-fr5" firstAttribute="centerX" secondItem="53G-YS-xGi" secondAttribute="centerX" id="Hbn-bQ-JOQ"/>
+                            <constraint firstItem="53G-YS-xGi" firstAttribute="bottom" secondItem="dKu-5q-fr5" secondAttribute="bottom" constant="10" id="OKS-54-gGV"/>
+                            <constraint firstItem="vV1-C5-Rnn" firstAttribute="trailing" secondItem="53G-YS-xGi" secondAttribute="trailing" id="PTv-LL-xlk"/>
+                            <constraint firstItem="vV1-C5-Rnn" firstAttribute="leading" secondItem="53G-YS-xGi" secondAttribute="leading" id="UR5-Vk-12s"/>
+                            <constraint firstItem="vV1-C5-Rnn" firstAttribute="top" secondItem="53G-YS-xGi" secondAttribute="top" id="ezM-jN-12h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="vV1-C5-Rnn" id="Mri-ve-UAT"/>
+                        <outlet property="labelOut" destination="dKu-5q-fr5" id="c89-Vl-hyo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3mg-Z9-Acp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1529.0076335877861" y="-156.33802816901408"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ybf-l9-Ewa">
             <objects>
@@ -129,6 +170,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="изображение по умолчанию" width="600" height="600"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

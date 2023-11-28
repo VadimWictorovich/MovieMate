@@ -88,8 +88,19 @@ class HomeTVController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        guard let vc = sb.instantiateViewController(withIdentifier: "SearchByWordsVC") as? SearchByWordsVC else { return }
+//
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
+}
+
+extension HomeTVController: PushToVC {
+    func didSelectCell(at indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
