@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C7028E72B15CE9600581F4E /* AllTimeTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7028E62B15CE9600581F4E /* AllTimeTVCell.swift */; };
+		6C7028EA2B15CFB400581F4E /* AllTimeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7028E82B15CFB400581F4E /* AllTimeCVCell.swift */; };
+		6C7028EB2B15CFB400581F4E /* AllTimeCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C7028E92B15CFB400581F4E /* AllTimeCVCell.xib */; };
 		6C98B0572B0E87C40068030B /* HomeTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98B0562B0E87C40068030B /* HomeTVController.swift */; };
 		6C98B0592B13C6180068030B /* BestMoviesInYearTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98B0582B13C6180068030B /* BestMoviesInYearTVCell.swift */; };
 		6C98B05E2B1519CD0068030B /* BestMoviesInYearCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98B05C2B1519CD0068030B /* BestMoviesInYearCVCell.swift */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C7028E62B15CE9600581F4E /* AllTimeTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTimeTVCell.swift; sourceTree = "<group>"; };
+		6C7028E82B15CFB400581F4E /* AllTimeCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTimeCVCell.swift; sourceTree = "<group>"; };
+		6C7028E92B15CFB400581F4E /* AllTimeCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllTimeCVCell.xib; sourceTree = "<group>"; };
 		6C98B0562B0E87C40068030B /* HomeTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTVController.swift; sourceTree = "<group>"; };
 		6C98B0582B13C6180068030B /* BestMoviesInYearTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestMoviesInYearTVCell.swift; sourceTree = "<group>"; };
 		6C98B05C2B1519CD0068030B /* BestMoviesInYearCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestMoviesInYearCVCell.swift; sourceTree = "<group>"; };
@@ -56,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				6C6BC3992B0BEDD80032860C /* SearchGroup */,
+				6C7028E52B15CE3D00581F4E /* AllTime */,
 				6C98B0562B0E87C40068030B /* HomeTVController.swift */,
 				6C98B0582B13C6180068030B /* BestMoviesInYearTVCell.swift */,
 				6C98B05C2B1519CD0068030B /* BestMoviesInYearCVCell.swift */,
@@ -90,6 +97,16 @@
 			children = (
 			);
 			path = SearchGroup;
+			sourceTree = "<group>";
+		};
+		6C7028E52B15CE3D00581F4E /* AllTime */ = {
+			isa = PBXGroup;
+			children = (
+				6C7028E62B15CE9600581F4E /* AllTimeTVCell.swift */,
+				6C7028E82B15CFB400581F4E /* AllTimeCVCell.swift */,
+				6C7028E92B15CFB400581F4E /* AllTimeCVCell.xib */,
+			);
+			path = AllTime;
 			sourceTree = "<group>";
 		};
 		6CCA994E2B09323A00E4A975 = {
@@ -194,6 +211,7 @@
 				6CCA99642B09324100E4A975 /* Assets.xcassets in Resources */,
 				6C98B05F2B1519CD0068030B /* CollectionViewCell.xib in Resources */,
 				6CCA99622B09323A00E4A975 /* Main.storyboard in Resources */,
+				6C7028EB2B15CFB400581F4E /* AllTimeCVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,8 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C7028E72B15CE9600581F4E /* AllTimeTVCell.swift in Sources */,
 				6C98B05E2B1519CD0068030B /* BestMoviesInYearCVCell.swift in Sources */,
 				6C98B0572B0E87C40068030B /* HomeTVController.swift in Sources */,
+				6C7028EA2B15CFB400581F4E /* AllTimeCVCell.swift in Sources */,
 				6C98B0592B13C6180068030B /* BestMoviesInYearTVCell.swift in Sources */,
 				6CCA995B2B09323A00E4A975 /* AppDelegate.swift in Sources */,
 				6CCA995D2B09323A00E4A975 /* SceneDelegate.swift in Sources */,

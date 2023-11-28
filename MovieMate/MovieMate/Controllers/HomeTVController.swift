@@ -10,7 +10,7 @@ import UIKit
 enum NameSection: String, CaseIterable {
     case rootSection = "Главное меню"
     case bestForYearSection = "Лучшее за 2023 год"
-    case bestAllTimeSection = "Лучшее за всю историю"
+    case bestAllTimeSection = "Лучшее за все время"
 }
 
 enum NameCellAction: String, CaseIterable {
@@ -29,6 +29,7 @@ class HomeTVController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(BestMoviesInYearTVCell.self, forCellReuseIdentifier: "cellInCollection1")
+        tableView.register(AllTimeTVCell.self, forCellReuseIdentifier: "cellInCollection2")
     }
 
     // MARK: - Table view data source
@@ -65,15 +66,12 @@ class HomeTVController: UITableViewController {
             let but = buttonNamed[indexPath.row]
             cell.textLabel?.text = but.rawValue
             cell.textLabel?.textColor = .white
-            
             return cell
         case .bestForYearSection:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection1", for: indexPath) as? BestMoviesInYearTVCell else { return UITableViewCell() }
             return cell
         case .bestAllTimeSection:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            let but = buttonNamed[indexPath.row]
-            cell.textLabel?.text = but.rawValue
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection2", for: indexPath) as? AllTimeTVCell else { return UITableViewCell() }
             return cell
         }
     }
@@ -88,6 +86,10 @@ class HomeTVController: UITableViewController {
         case .bestAllTimeSection:
             return 200.0
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        <#code#>
     }
 }
 

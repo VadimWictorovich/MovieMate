@@ -1,14 +1,14 @@
 //
-//  FirstCollectionInTVC.swift
+//  AllTimeTVCell.swift
 //  MovieMate
 //
-//  Created by Вадим Игнатенко on 26.11.23.
+//  Created by Вадим Игнатенко on 28.11.23.
 //
 
 import UIKit
 
-final class BestMoviesInYearTVCell: UITableViewCell {
-    
+final class AllTimeTVCell: UITableViewCell {
+   
     private var collectionView: UICollectionView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -22,7 +22,7 @@ final class BestMoviesInYearTVCell: UITableViewCell {
 
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell1")
+        collectionView.register(UINib(nibName: "AllTimeCVCell", bundle: nil), forCellWithReuseIdentifier: "Cell2")
         contentView.addSubview(collectionView)
 
         NSLayoutConstraint.activate([
@@ -38,14 +38,14 @@ final class BestMoviesInYearTVCell: UITableViewCell {
        }
 }
 
-extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension AllTimeTVCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? BestMoviesInYearCVCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as? AllTimeCVCell else { return UICollectionViewCell() }
         cell.backgroundColor = .black
         cell.layer.cornerRadius = 10
         cell.imageView.image = UIImage(named: "изображение по умолчанию")
