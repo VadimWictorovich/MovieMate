@@ -1,5 +1,5 @@
 //
-//  SearchByWordsVC.swift
+//  DetailVC.swift
 //  MovieMate
 //
 //  Created by Вадим Игнатенко on 28.11.23.
@@ -7,9 +7,11 @@
 
 import UIKit
 
-class SearchByWordsVC: UIViewController {
+class DetailVC: UIViewController {
 
-    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var labelOut: UILabel!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
