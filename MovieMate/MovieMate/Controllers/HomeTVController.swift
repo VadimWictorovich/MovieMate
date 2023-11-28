@@ -28,7 +28,7 @@ class HomeTVController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(FirstCollectionInTVC.self, forCellReuseIdentifier: "cellInCollection1")
+        tableView.register(BestMoviesInYearTVCell.self, forCellReuseIdentifier: "cellInCollection1")
     }
 
     // MARK: - Table view data source
@@ -68,7 +68,7 @@ class HomeTVController: UITableViewController {
             
             return cell
         case .bestForYearSection:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection1", for: indexPath) as? FirstCollectionInTVC else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection1", for: indexPath) as? BestMoviesInYearTVCell else { return UITableViewCell() }
             return cell
         case .bestAllTimeSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)

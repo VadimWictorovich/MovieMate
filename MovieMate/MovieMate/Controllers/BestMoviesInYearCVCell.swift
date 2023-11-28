@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class BestMoviesInYearCVCell: UICollectionViewCell {
 
     
     @IBOutlet weak var imageView: UIImageView!

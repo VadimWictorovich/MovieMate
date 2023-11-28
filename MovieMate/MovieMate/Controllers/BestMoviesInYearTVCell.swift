@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FirstCollectionInTVC: UITableViewCell {
+final class BestMoviesInYearTVCell: UITableViewCell {
     
     private var collectionView: UICollectionView!
     
@@ -38,16 +38,17 @@ final class FirstCollectionInTVC: UITableViewCell {
        }
 }
 
-extension FirstCollectionInTVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? BestMoviesInYearCVCell else { return UICollectionViewCell() }
         cell.backgroundColor = .black
-        cell.imageView.image = UIImage(named: "логотип")
+        cell.layer.cornerRadius = 10
+        cell.imageView.image = UIImage(named: "изображение по умолчанию")
         cell.label.text = "Название фильма"
         cell.label.textColor = .white
         return cell
