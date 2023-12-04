@@ -1,16 +1,14 @@
 //
-//  SearchByWordsVC.swift
+//  SeatchByWordsVC.swift
 //  MovieMate
 //
-//  Created by Вадим Игнатенко on 28.11.23.
+//  Created by Вадим Игнатенко on 4.12.23.
 //
 
 import UIKit
 
-class SearchByWordsVC: UIViewController {
+class SeatchByWordsVC: UIViewController {
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -63,6 +63,7 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
             return CGSize(width: 150, height: 190)
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didSelectCell(at: indexPath)
     }

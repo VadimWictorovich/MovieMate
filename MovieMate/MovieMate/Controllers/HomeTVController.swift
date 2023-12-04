@@ -57,18 +57,18 @@ class HomeTVController: UITableViewController {
         }
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch sectionNamed[indexPath.section] {
         case .rootSection:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "nameButton", for: indexPath)
             let but = buttonNamed[indexPath.row]
             cell.textLabel?.text = but.rawValue
             cell.textLabel?.textColor = .white
             return cell
         case .bestForYearSection:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection1", for: indexPath) as? BestMoviesInYearTVCell else { return UITableViewCell() }
+            cell.delegate = self
             return cell
         case .bestAllTimeSection:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection2", for: indexPath) as? AllTimeTVCell else { return UITableViewCell() }
@@ -88,19 +88,28 @@ class HomeTVController: UITableViewController {
         }
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-//        guard let vc = sb.instantiateViewController(withIdentifier: "SearchByWordsVC") as? SearchByWordsVC else { return }
-//
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        switch buttonNamed[indexPath.row] {
+        case .firstButName:
+            guard let vc = sb.instantiateViewController(withIdentifier: "SeatchByWordsVC") as? SeatchByWordsVC else { return }
+            navigationController?.pushViewController(vc, animated: true)
+        case .secondButName: break
+            
+        case .thirdButName: break
+            
+        case .fourthButName: break
+            
+        }
+    }
 }
 
 extension HomeTVController: PushToVC {
     func didSelectCell(at indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC else { return }
-        navigationController?.pushViewController(vc, animated: true)
+        if let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
