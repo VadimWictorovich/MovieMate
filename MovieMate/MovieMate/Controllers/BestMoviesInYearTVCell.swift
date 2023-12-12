@@ -13,8 +13,11 @@ protocol PushToVC: AnyObject {
 
 final class BestMoviesInYearTVCell: UITableViewCell {
     
-    weak var delegate: PushToVC?
     private var collectionView: UICollectionView!
+    weak var delegate: PushToVC?
+    var moviesId: [MovieId] = []
+    var movies: [MovieDetail] = []
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,6 +39,7 @@ final class BestMoviesInYearTVCell: UITableViewCell {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        getMovie()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -46,11 +50,15 @@ final class BestMoviesInYearTVCell: UITableViewCell {
 extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        moviesId.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? BestMoviesInYearCVCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? BestMoviesInYearCVCell,
+              movies.isEmpty else { return UICollectionViewCell() }
+        print("moviesId------------\(moviesId.count)")
+        print("movies------------\(movies.count)")
+//        let movie = movies[indexPath.row]
         cell.backgroundColor = .black
         cell.layer.cornerRadius = 10
         cell.imageView.image = UIImage(named: "изображение по умолчанию")
@@ -63,8 +71,26 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
             return CGSize(width: 150, height: 190)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didSelectCell(at: indexPath)
     }
+    
+    private func getMovieId() {
+        NetworkService.fetchMovie2023 { [weak self] result, _ in
+            guard let result else { return }
+            self?.moviesId = result.docs
+            self?.collectionView.reloadData()
+            }
+        }
+    
+    private func getMovie() {
+        getMovieId()
+        moviesId.forEach { value in
+            NetworkService.fethMovieById(movieId: value.id) { [weak self] result, _ in
+                guard let result else { return }
+                self?.movies.append(result)
+            }
+        }
+    }
 }
+

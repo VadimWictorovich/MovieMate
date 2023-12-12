@@ -27,7 +27,6 @@ class HomeTVController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.register(BestMoviesInYearTVCell.self, forCellReuseIdentifier: "cellInCollection1")
         tableView.register(AllTimeTVCell.self, forCellReuseIdentifier: "cellInCollection2")
     }
