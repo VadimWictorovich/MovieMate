@@ -32,7 +32,7 @@ final class SeatchByWordsView: UIView {
     private let closeButton: UIButton = {
         let but = UIButton()
         but.imageView?.image = UIImage(systemName: "xmark.circle.fill")
-        but.addTarget(nil, action: #selector(closeView), for: .touchUpInside)
+        but.addTarget(nil, action: #selector(HomeTVController.closeSearchView), for: .touchUpInside)
         but.translatesAutoresizingMaskIntoConstraints = false
         return but
     }()
@@ -64,8 +64,10 @@ final class SeatchByWordsView: UIView {
     
     
     private func configure() {
-        backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        backgroundColor = .white
         layer.cornerRadius = 15
+        layer.borderWidth = 5.0
+        layer.borderColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         
         addSubview(textLabel)
         addSubview(textField)
@@ -73,13 +75,11 @@ final class SeatchByWordsView: UIView {
         addSubview(seatchButton)
     }
     
+    
     private func setupConstrains() {
         
     }
     
-    @objc private func closeView() {
-        
-    }
     
     @objc private func seatchMovieAction() {
         
