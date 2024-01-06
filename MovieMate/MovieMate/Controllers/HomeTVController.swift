@@ -24,6 +24,7 @@ class HomeTVController: UITableViewController {
     
     private let buttonNamed = NameCellAction.allCases
     private let sectionNamed = NameSection.allCases
+    private lazy var searchView = SeatchByWordsView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
