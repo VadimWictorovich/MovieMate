@@ -100,7 +100,7 @@ class HomeTVController: UITableViewController {
     }
     
     private func showSearchView() {
-        searchView.frame.size = CGSize(width: 260, height: 500)
+        searchView.frame.size = CGSize(width: 260, height: 400)
         searchView.center.x = view.center.x
         searchView.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
         view.addSubview(searchView)
