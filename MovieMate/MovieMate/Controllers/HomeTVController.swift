@@ -24,6 +24,7 @@ class HomeTVController: UITableViewController {
     
     private let buttonNamed = NameCellAction.allCases
     private let sectionNamed = NameSection.allCases
+    private lazy var searchView = SeatchByWordsView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,6 @@ class HomeTVController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch sectionNamed[indexPath.section] {
         case .rootSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: "nameButton", for: indexPath)
@@ -76,7 +76,6 @@ class HomeTVController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         switch sectionNamed[indexPath.section] {
         case .rootSection:
             return 60.0
@@ -88,18 +87,39 @@ class HomeTVController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
         switch buttonNamed[indexPath.row] {
         case .firstButName:
-            guard let vc = sb.instantiateViewController(withIdentifier: "SeatchByWordsVC") as? SeatchByWordsVC else { return }
-            navigationController?.pushViewController(vc, animated: true)
-        case .secondButName: break
-            
-        case .thirdButName: break
-            
-        case .fourthButName: break
-            
+            showSearchView()
+        case .secondButName:
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case .thirdButName:
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case .fourthButName:
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
+    }
+    
+    private func showSearchView() {
+        searchView.frame.size = CGSize(width: 260, height: 400)
+        searchView.center.x = view.center.x
+        searchView.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
+        view.addSubview(searchView)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
+            self?.searchView.transform = .identity
+        }
+    }
+    
+    @objc func closeSearchView() {
+        searchView.removeFromSuperview()
     }
 }
 
