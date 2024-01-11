@@ -25,6 +25,7 @@ class HomeTVController: UITableViewController {
     private let buttonNamed = NameCellAction.allCases
     private let sectionNamed = NameSection.allCases
     private lazy var searchView = SeatchByWordsView()
+    private lazy var randomMovie = RandomMovieView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,10 +97,7 @@ class HomeTVController: UITableViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case .thirdButName:
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
-                navigationController?.pushViewController(vc, animated: true)
-            }
+                showRandomMovieView()
         case .fourthButName:
             let sb = UIStoryboard(name: "Main", bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
@@ -118,8 +116,22 @@ class HomeTVController: UITableViewController {
         }
     }
     
+    private func showRandomMovieView() {
+        randomMovie.frame.size = CGSize(width: 260, height: 400)
+        randomMovie.center.x = view.center.x
+        randomMovie.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
+        view.addSubview(randomMovie)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
+            self?.randomMovie.transform = .identity
+        }
+    }
+    
     @objc func closeSearchView() {
         searchView.removeFromSuperview()
+    }
+    
+    @objc func closeRandomMovieView() {
+        randomMovie.removeFromSuperview()
     }
 }
 
