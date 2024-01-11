@@ -90,12 +90,21 @@ class HomeTVController: UITableViewController {
         switch buttonNamed[indexPath.row] {
         case .firstButName:
             showSearchView()
-        case .secondButName: break
-            
-        case .thirdButName: break
-            
-        case .fourthButName: break
-            
+        case .secondButName:
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case .thirdButName:
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case .fourthButName:
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     
