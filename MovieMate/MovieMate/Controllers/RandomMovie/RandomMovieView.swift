@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RandomMovieView: UIView {
+final class RandomMovieView: UIView {
 
         private let textLabel: UILabel = {
             let label = UILabel()

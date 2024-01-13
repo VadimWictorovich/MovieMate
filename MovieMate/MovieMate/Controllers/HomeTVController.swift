@@ -20,7 +20,7 @@ enum NameCellAction: String, CaseIterable {
     case fourthButName = "Сейчас в кино"
 }
 
-class HomeTVController: UITableViewController {
+final class HomeTVController: UITableViewController {
     
     private let buttonNamed = NameCellAction.allCases
     private let sectionNamed = NameSection.allCases
