@@ -178,16 +178,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="983"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="изображение по умолчанию" translatesAutoresizingMaskIntoConstraints="NO" id="GAN-Ak-tTK">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="393"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="GAN-Ak-tTK" secondAttribute="height" multiplier="1:1" id="pck-lo-HEd"/>
+                                                </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название фильма" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xnt-Kx-KfY">
-                                                <rect key="frame" x="6" y="605" width="381" height="32.666666666666629"/>
+                                                <rect key="frame" x="6" y="398" width="381" height="32.666666666666686"/>
                                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="32"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3Dy-XV-gQ0">
-                                                <rect key="frame" x="20" y="677.66666666666663" width="353" height="64.333333333333371"/>
+                                                <rect key="frame" x="20" y="470.66666666666663" width="353" height="64.333333333333371"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7c-65-IQx">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="24.666666666666668"/>
