@@ -107,7 +107,7 @@ final class HomeTVController: UITableViewController {
     }
     
     private func showSearchView() {
-        searchView.frame.size = CGSize(width: 260, height: 400)
+        searchView.frame.size = CGSize(width: 320, height: 250)
         searchView.center.x = view.center.x
         searchView.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
         view.addSubview(searchView)
@@ -117,7 +117,7 @@ final class HomeTVController: UITableViewController {
     }
     
     private func showRandomMovieView() {
-        randomMovie.frame.size = CGSize(width: 260, height: 400)
+        randomMovie.frame.size = CGSize(width: 320, height: 400)
         randomMovie.center.x = view.center.x
         randomMovie.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
         view.addSubview(randomMovie)
