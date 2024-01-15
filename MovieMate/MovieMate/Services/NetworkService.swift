@@ -34,7 +34,7 @@ class NetworkService {
         }
     }
     
-    static func fethMovieById (movieId: Int, callback: @escaping (_ result: MovieDetail?, _ error: Error?) -> ()) {
+    static func fetchMovieById (movieId: Int, callback: @escaping (_ result: MovieDetail?, _ error: Error?) -> ()) {
         let url = ModelAPIConstans.serverPath + String(movieId)
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
@@ -50,6 +50,33 @@ class NetworkService {
                         movie = try JSONDecoder().decode(MovieDetail.self, from: data)
                     } catch (let decodError) {
                         print("decodError--------------------\(decodError)")
+                    }
+                case .failure(let error):
+                    err = error
+                }
+                callback(movie, err)
+        }
+    }
+    
+    
+    // MARK: - Search random movie
+    static func fetchRandomMovie (callback: @escaping (_ result: MovieDetail?, _ error: Error?) -> ()) {
+        let url = "https://api.kinopoisk.dev/v1.4/movie/random?notNullFields=id&type=movie&lists=top250"
+        let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
+            .response { response in
+                var movie: MovieDetail?
+                var err: Error?
+                switch response.result {
+                case .success(let data):
+                    guard let data else { callback(movie, err)
+                        return
+                    }
+                    print(JSON(data))
+                    do {
+                        movie = try JSONDecoder().decode(MovieDetail.self, from: data)
+                    } catch (let decodError) {
+                        print("decodError--------------------\(decodError)=========")
                     }
                 case .failure(let error):
                     err = error

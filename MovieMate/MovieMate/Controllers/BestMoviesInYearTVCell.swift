@@ -86,7 +86,7 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
     private func getMovie() {
         getMovieId()
         moviesId.forEach { value in
-            NetworkService.fethMovieById(movieId: value.id) { [weak self] result, _ in
+            NetworkService.fetchMovieById(movieId: value.id) { [weak self] result, _ in
                 guard let result else { return }
                 self?.movies.append(result)
             }

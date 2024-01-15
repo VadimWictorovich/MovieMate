@@ -100,7 +100,7 @@ final class SeatchByWordsView: UIView {
         NSLayoutConstraint(item: seatchButton, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 30.0).isActive = true
     }
     
-    
+    // TODO: - Доработать этот код
     @objc private func seatchMovieAction() {
         
     }

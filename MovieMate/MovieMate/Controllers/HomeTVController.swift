@@ -26,7 +26,8 @@ final class HomeTVController: UITableViewController {
     private let sectionNamed = NameSection.allCases
     private lazy var searchView = SeatchByWordsView()
     private lazy var randomMovie = RandomMovieView()
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(BestMoviesInYearTVCell.self, forCellReuseIdentifier: "cellInCollection1")

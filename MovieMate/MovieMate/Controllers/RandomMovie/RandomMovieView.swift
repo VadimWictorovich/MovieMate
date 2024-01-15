@@ -114,4 +114,11 @@ final class RandomMovieView: UIView {
             NSLayoutConstraint(item: okButton, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 30.0).isActive = true
             NSLayoutConstraint(item: okButton, attribute: .top, relatedBy: .equal, toItem: nameMovie, attribute: .topMargin, multiplier: 1.0, constant: 30.0).isActive = true
         }
+    
+    // TODO: - Не работает нужно доработать
+    private func getRandomMovie() {
+        NetworkService.fetchRandomMovie { [weak self] result, _ in
+            guard let result else { return }
+        }
+    }
 }
