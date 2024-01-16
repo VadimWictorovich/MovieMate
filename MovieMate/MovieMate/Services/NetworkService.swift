@@ -69,14 +69,15 @@ class NetworkService {
                 var err: Error?
                 switch response.result {
                 case .success(let data):
-                    guard let data else { callback(movie, err)
+                    guard let data else { 
+                        callback(movie, err)
                         return
                     }
                     print(JSON(data))
                     do {
                         movie = try JSONDecoder().decode(MovieDetail.self, from: data)
                     } catch (let decodError) {
-                        print("decodError--------------------\(decodError)=========")
+                        print("Error decoding response data: \(decodError)")
                     }
                 case .failure(let error):
                     err = error

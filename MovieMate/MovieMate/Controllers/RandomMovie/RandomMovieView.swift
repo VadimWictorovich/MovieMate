@@ -8,6 +8,20 @@
 import UIKit
 
 final class RandomMovieView: UIView {
+    
+        private var movie: MovieDetail?
+    
+        private let nameMovieLabel: UILabel = {
+            let lab = UILabel()
+            lab.font = .systemFont(ofSize: 10)
+            lab.textColor = .black
+            lab.textAlignment = .center
+            lab.numberOfLines = 0
+            lab.translatesAutoresizingMaskIntoConstraints = false
+//            lab.text = "имя фильма"
+            return lab
+        }()
+    
 
         private let textLabel: UILabel = {
             let label = UILabel()
@@ -20,18 +34,6 @@ final class RandomMovieView: UIView {
             return label
         }()
     
-        
-        private let nameMovie: UILabel = {
-            let label = UILabel()
-            label.text = "Название фильма"
-            label.font = .systemFont(ofSize: 10)
-            label.textColor = .black
-            label.textAlignment = .center
-            label.numberOfLines = 0
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
     
         private let closeButton: UIButton = {
             let but = UIButton()
@@ -62,11 +64,12 @@ final class RandomMovieView: UIView {
             picture.translatesAutoresizingMaskIntoConstraints = false
             return picture
         }()
-        
+    
         
         override init(frame: CGRect) {
             super.init(frame: frame)
             
+            getRandomMovie()
             configure()
             setupConstrains()
         }
@@ -84,7 +87,7 @@ final class RandomMovieView: UIView {
             layer.borderColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
             
             addSubview(textLabel)
-            addSubview(nameMovie)
+            addSubview(nameMovieLabel)
             addSubview(closeButton)
             addSubview(okButton)
             addSubview(picture)
@@ -106,19 +109,75 @@ final class RandomMovieView: UIView {
             NSLayoutConstraint(item: picture, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 200.0).isActive = true
             NSLayoutConstraint(item: picture, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0.0).isActive = true
             
-            NSLayoutConstraint(item: nameMovie, attribute: .bottom, relatedBy: .equal, toItem: picture, attribute: .bottomMargin, multiplier: 1.0, constant: 30.0).isActive = true
-            NSLayoutConstraint(item: nameMovie, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 6.0).isActive = true
-            NSLayoutConstraint(item: nameMovie, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 6.0).isActive = true
+            NSLayoutConstraint(item: nameMovieLabel, attribute: .bottom, relatedBy: .equal, toItem: picture, attribute: .bottomMargin, multiplier: 1.0, constant: 30.0).isActive = true
+            NSLayoutConstraint(item: nameMovieLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 6.0).isActive = true
+            NSLayoutConstraint(item: nameMovieLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             
             NSLayoutConstraint(item: okButton, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -30.0).isActive = true
             NSLayoutConstraint(item: okButton, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 30.0).isActive = true
-            NSLayoutConstraint(item: okButton, attribute: .top, relatedBy: .equal, toItem: nameMovie, attribute: .topMargin, multiplier: 1.0, constant: 30.0).isActive = true
+            NSLayoutConstraint(item: okButton, attribute: .top, relatedBy: .equal, toItem: nameMovieLabel, attribute: .topMargin, multiplier: 1.0, constant: 30.0).isActive = true
         }
     
     // TODO: - Не работает нужно доработать
+//    private func getRandomMovie() {
+//        let queue = DispatchQueue.global(qos: .utility)
+//        queue.async {
+//            NetworkService.fetchRandomMovie { [weak self] result, error in
+//                if let error = error {
+//                    print("Ошибка при получении данных: \(error)")
+//                    return
+//                }
+//                guard let self,
+//                      let result else { return }
+//                DispatchQueue.main.async {
+//                    self.movie = result
+//                    self.updateUIWithMovie()
+//                }
+//            }
+//        }
+//    }
+//    
+//    private func updateUIWithMovie() {
+//            guard let movie = movie else { return }
+//            nameMovieLabel.text = movie.name
+//            // Подставьте свой код для загрузки изображения фильма
+//            // Например: picture.image = UIImage(named: movie.imageName)
+//            // Или использовать Kingfisher, AlamofireImage и т.д. для загрузки из сети
+//            picture.image = UIImage(named: "изображение по умолчанию")
+//        }
+    
     private func getRandomMovie() {
-        NetworkService.fetchRandomMovie { [weak self] result, _ in
-            guard let result else { return }
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.async {
+            NetworkService.fetchRandomMovie { [weak self] result, error in
+                if let error = error {
+                    print("Ошибка при получении данных: \(error)")
+                    return
+                }
+                guard let self, let result = result else {
+                    print("Ошибка: получены некорректные данные")
+                    return
+                }
+                print("Получен случайный фильм: \(result.name)")
+                DispatchQueue.main.async {
+                    self.movie = result
+                    self.updateUIWithMovie()
+                }
+            }
         }
     }
+
+    private func updateUIWithMovie() {
+        guard let movie = movie else {
+            print("Ошибка: объект фильма не инициализирован")
+            return
+        }
+        print("Обновление UI с информацией о фильме: \(movie.name)")
+        nameMovieLabel.text = movie.name
+        // Подставьте свой код для загрузки изображения фильма
+        // Например: picture.image = UIImage(named: movie.imageName)
+        // Или использовать Kingfisher, AlamofireImage и т.д. для загрузки из сети
+        picture.image = UIImage(named: "изображение по умолчанию")
+    }
 }
+

@@ -10,41 +10,41 @@ import Foundation
 
 // Структура для внешнего идентификатора фильма
 struct ExternalId: Codable {
-    let kpHD: String
-    let imdb: String
-    let tmdb: Int
+    let kpHD: String?
+    let imdb: String?
+    let tmdb: Int?
 }
 
 // Структура для представления персоны (актера)
 struct Person: Codable {
     let id: Int
-    let photo: String
-    let name: String
-    let enName: String
-    let description: String
-    let profession: String
-    let enProfession: String
+    let photo: String?
+    let name: String?
+    let enName: String?
+    let description: String?
+    let profession: String?
+    let enProfession: String?
 }
 
 // Структура для представления жанра
 struct Genre: Codable {
-    let name: String
+    let name: String?
 }
 
 // Структура для представления рейтинга
 struct Rating: Codable {
-    let kp: Double
-    let imdb: Double
-    let tmdb: Double
-    let filmCritics: Double
-    let russianFilmCritics: Double
-    let await: Double
+    let kp: Double?
+    let imdb: Double?
+    let tmdb: Double?
+    let filmCritics: Double?
+    let russianFilmCritics: Double?
+    let await: Double?
 }
 
 // Структура для представления изображения
 struct Image: Codable {
-    let url: String
-    let previewUrl: String
+    let url: String?
+    let previewUrl: String?
 }
 
 struct MovieId: Codable {
@@ -53,10 +53,10 @@ struct MovieId: Codable {
 
 struct MovieIdsResponse: Codable {
     let docs: [MovieId]
-    let total: Int
-    let limit: Int
-    let page: Int
-    let pages: Int
+    let total: Int?
+    let limit: Int?
+    let page: Int?
+    let pages: Int?
 }
 
 // Главная структура для представления фильма
@@ -100,27 +100,27 @@ struct MovieDetail: Codable {
 
 // Вспомогательная структура для представления имени
 struct Name: Codable {
-    let name: String
-    let language: String
-    let type: String
+    let name: String?
+    let language: String?
+    let type: String?
 }
 
 // Вспомогательная структура для представления голосов
 struct Votes: Codable {
-    let kp: String
-    let imdb: Int
-    let tmdb: Int
-    let filmCritics: Int
-    let russianFilmCritics: Int
-    let await: Int
+    let kp: String?
+    let imdb: Int?
+    let tmdb: Int?
+    let filmCritics: Int?
+    let russianFilmCritics: Int?
+    let await: Int?
 }
 
 
 // Вспомогательная структура для представления информации о рецензиях
 struct ReviewInfo: Codable {
-    let count: Int
-    let positiveCount: Int
-    let percentage: String
+    let count: Int?
+    let positiveCount: Int?
+    let percentage: String?
 }
 
 // Структура для представления информации о просмотрах
@@ -130,9 +130,9 @@ struct Watchability: Codable {
 
 // Вспомогательная структура для представления элемента просмотра
 struct WatchabilityItem: Codable {
-    let name: String
-    let logo: Image
-    let url: String
+    let name: String?
+    let logo: Image?
+    let url: String?
 }
 
 // Структура для представления информации о годе выпуска
@@ -148,24 +148,24 @@ struct Network: Codable {
 
 // Вспомогательная структура для представления элемента сети
 struct NetworkItem: Codable {
-    let name: String
-    let logo: Image
+    let name: String?
+    let logo: Image?
 }
 
 // Структура для представления информации о изображениях
 struct ImagesInfo: Codable {
-    let postersCount: Int
-    let backdropsCount: Int
-    let framesCount: Int
+    let postersCount: Int?
+    let backdropsCount: Int?
+    let framesCount: Int?
 }
 
 // Структура для представления элемента списка
 struct ListItem: Codable {
-    let listName: String
+    let listName: String?
 }
 
 // Структура для представления информации о плейлисте
 struct PlaylistInfo: Codable {
-    let playlists: [ListItem]
+    let playlists: [ListItem]?
 }
 
