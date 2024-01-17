@@ -5,8 +5,9 @@
 //  Created by Вадим Игнатенко on 11.12.23.
 //
 
-import Foundation
+import UIKit
 import Alamofire
+import AlamofireImage
 import SwiftyJSON
 
 class NetworkService {
@@ -83,6 +84,17 @@ class NetworkService {
                     err = error
                 }
                 callback(movie, err)
+        }
+    }
+    
+    static func fetchMovieImage (imageURL: String, callback: @escaping (_ result: UIImage?, _ error: Error?) -> ()) {
+        AF.request(imageURL).responseImage { response in
+            switch response.result {
+                case .success(let image):
+                    callback(image, nil)
+                case .failure(let error):
+                    callback(nil, error)
+            }
         }
     }
 }

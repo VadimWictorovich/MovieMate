@@ -34,8 +34,6 @@ final class HomeTVController: UITableViewController {
         tableView.register(AllTimeTVCell.self, forCellReuseIdentifier: "cellInCollection2")
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         sectionNamed.count
     }
@@ -133,6 +131,10 @@ final class HomeTVController: UITableViewController {
     
     @objc func closeRandomMovieView() {
         randomMovie.removeFromSuperview()
+    }
+    
+    @objc func showRandomMovie() {
+        randomMovie.getRandomMovie()
     }
 }
 

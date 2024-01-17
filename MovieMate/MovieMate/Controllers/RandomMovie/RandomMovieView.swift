@@ -10,7 +10,7 @@ import UIKit
 final class RandomMovieView: UIView {
     
         private var movie: MovieDetail?
-    
+            
         private let nameMovieLabel: UILabel = {
             let lab = UILabel()
             lab.font = .systemFont(ofSize: 10)
@@ -18,7 +18,7 @@ final class RandomMovieView: UIView {
             lab.textAlignment = .center
             lab.numberOfLines = 0
             lab.translatesAutoresizingMaskIntoConstraints = false
-//            lab.text = "имя фильма"
+            lab.text = "имя фильма"
             return lab
         }()
     
@@ -45,13 +45,13 @@ final class RandomMovieView: UIView {
         }()
         
         
-        private let okButton: UIButton = {
+        private let reapitButton: UIButton = {
             let but = UIButton()
-            but.setTitle("ОК", for: .normal)
+            but.setTitle("Повторить!", for: .normal)
             but.setTitleColor(.white, for: .normal)
             but.backgroundColor = #colorLiteral(red: 0.2274968624, green: 0.8351719975, blue: 0.7646718621, alpha: 1)
             but.layer.cornerRadius = 20
-            but.addTarget(nil, action: #selector(HomeTVController.closeRandomMovieView), for: .touchUpInside)
+            but.addTarget(nil, action: #selector(HomeTVController.showRandomMovie), for: .touchUpInside)
             but.translatesAutoresizingMaskIntoConstraints = false
             return but
         }()
@@ -89,7 +89,7 @@ final class RandomMovieView: UIView {
             addSubview(textLabel)
             addSubview(nameMovieLabel)
             addSubview(closeButton)
-            addSubview(okButton)
+            addSubview(reapitButton)
             addSubview(picture)
         }
         
@@ -113,9 +113,9 @@ final class RandomMovieView: UIView {
             NSLayoutConstraint(item: nameMovieLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             NSLayoutConstraint(item: nameMovieLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             
-            NSLayoutConstraint(item: okButton, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -30.0).isActive = true
-            NSLayoutConstraint(item: okButton, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 30.0).isActive = true
-            NSLayoutConstraint(item: okButton, attribute: .top, relatedBy: .equal, toItem: nameMovieLabel, attribute: .topMargin, multiplier: 1.0, constant: 30.0).isActive = true
+            NSLayoutConstraint(item: reapitButton, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -30.0).isActive = true
+            NSLayoutConstraint(item: reapitButton, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 30.0).isActive = true
+            NSLayoutConstraint(item: reapitButton, attribute: .top, relatedBy: .equal, toItem: nameMovieLabel, attribute: .topMargin, multiplier: 1.0, constant: 30.0).isActive = true
         }
     
     // TODO: - Не работает нужно доработать
@@ -146,7 +146,7 @@ final class RandomMovieView: UIView {
 //            picture.image = UIImage(named: "изображение по умолчанию")
 //        }
     
-    private func getRandomMovie() {
+     func getRandomMovie() {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
             NetworkService.fetchRandomMovie { [weak self] result, error in
@@ -166,6 +166,12 @@ final class RandomMovieView: UIView {
             }
         }
     }
+    
+    
+    // TODO: - Доделать
+    private func getImage() {
+      
+        }
 
     private func updateUIWithMovie() {
         guard let movie = movie else {
