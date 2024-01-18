@@ -10,8 +10,8 @@ import NVActivityIndicatorView
 import NVActivityIndicatorViewExtended
 
 extension UIViewController: NVActivityIndicatorViewable {
-    func startActivityAnimation(message: String, type: NVActivityIndicatorType, color: UIColor, textColor: UIColor) {
-        startAnimating(message: message, type: type, color: color, textColor: textColor)
+    func startActivityAnimation() {
+        startAnimating(message: "Загрузка...", type: .ballScaleMultiple, color: .white, textColor: .white)
     }
     
     func stopActivityAnimation() {

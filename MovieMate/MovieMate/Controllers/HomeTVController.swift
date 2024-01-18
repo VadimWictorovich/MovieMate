@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+// MARK: - ENUMS
 enum NameSection: String, CaseIterable {
     case rootSection = "Главное меню"
     case bestForYearSection = "Лучшее за 2023 год"
@@ -20,20 +22,27 @@ enum NameCellAction: String, CaseIterable {
     case fourthButName = "Сейчас в кино"
 }
 
+
+// MARK: - ViewController
 final class HomeTVController: UITableViewController {
     
+    
+    // MARK: Properties
     private let buttonNamed = NameCellAction.allCases
     private let sectionNamed = NameSection.allCases
     private lazy var searchView = SeatchByWordsView()
     private lazy var randomMovie = RandomMovieView()
+//    private var openView: Bool?
     
     
+    // MARK: Lifecycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(BestMoviesInYearTVCell.self, forCellReuseIdentifier: "cellInCollection1")
         tableView.register(AllTimeTVCell.self, forCellReuseIdentifier: "cellInCollection2")
     }
 
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         sectionNamed.count
     }
@@ -96,7 +105,7 @@ final class HomeTVController: UITableViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case .thirdButName:
-            startActivityAnimation(message: "Загрузка...", type: .ballScaleMultiple, color: .white, textColor: .white)
+            startActivityAnimation()
             getRandomMovie()
         case .fourthButName:
             let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -106,6 +115,8 @@ final class HomeTVController: UITableViewController {
         }
     }
     
+    
+    // MARK: - Methods
     private func showSearchView() {
         searchView.frame.size = CGSize(width: 320, height: 250)
         searchView.center.x = view.center.x
@@ -123,6 +134,7 @@ final class HomeTVController: UITableViewController {
         view.addSubview(randomMovie)
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
             self?.randomMovie.transform = .identity
+//            self?.openView = true
         }
     }
     
@@ -149,20 +161,24 @@ final class HomeTVController: UITableViewController {
        }
    }
     
+    // MARK: Objs methods
     @objc func closeSearchView() {
         searchView.removeFromSuperview()
     }
     
     @objc func closeRandomMovieView() {
+//        openView = false
         randomMovie.removeFromSuperview()
     }
     
     @objc func showRandomMovie() {
         getRandomMovie()
-        startActivityAnimation(message: "Загрузка...", type: .ballScaleMultiple, color: .white, textColor: .white)
+        startActivityAnimation()
     }
 }
 
+
+// MARK: - Extentions VC
 extension HomeTVController: PushToVC {
     func didSelectCell(at indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)

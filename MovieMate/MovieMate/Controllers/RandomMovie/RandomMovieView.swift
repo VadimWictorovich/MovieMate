@@ -18,7 +18,7 @@ final class RandomMovieView: UIView {
             lab.textAlignment = .center
             lab.numberOfLines = 0
             lab.translatesAutoresizingMaskIntoConstraints = false
-            lab.text = "имя фильма"
+//            lab.text = "имя фильма"
             return lab
         }()
     
@@ -116,34 +116,6 @@ final class RandomMovieView: UIView {
             NSLayoutConstraint(item: reapitButton, attribute: .top, relatedBy: .equal, toItem: nameMovieLabel, attribute: .topMargin, multiplier: 1.0, constant: 30.0).isActive = true
         }
     
-    // TODO: - Не работает нужно доработать
-//    private func getRandomMovie() {
-//        let queue = DispatchQueue.global(qos: .utility)
-//        queue.async {
-//            NetworkService.fetchRandomMovie { [weak self] result, error in
-//                if let error = error {
-//                    print("Ошибка при получении данных: \(error)")
-//                    return
-//                }
-//                guard let self,
-//                      let result else { return }
-//                DispatchQueue.main.async {
-//                    self.movie = result
-//                    self.updateUIWithMovie()
-//                }
-//            }
-//        }
-//    }
-//    
-//    private func updateUIWithMovie() {
-//            guard let movie = movie else { return }
-//            nameMovieLabel.text = movie.name
-//            // Подставьте свой код для загрузки изображения фильма
-//            // Например: picture.image = UIImage(named: movie.imageName)
-//            // Или использовать Kingfisher, AlamofireImage и т.д. для загрузки из сети
-//            picture.image = UIImage(named: "изображение по умолчанию")
-//        }
-    
     
     // TODO: - Доделать
     private func getImage() {
@@ -152,12 +124,12 @@ final class RandomMovieView: UIView {
 
     
      func updateUIWithMovie() {
-        guard let movie = movie else {
+         guard let movie = movie else {
             print("Ошибка: объект фильма не инициализирован")
             return
         }
-        print("Обновление UI с информацией о фильме: \(movie.name)")
-        nameMovieLabel.text = movie.name
+         print("Обновление UI с информацией о фильме: \(movie.name ?? "No value")")
+         nameMovieLabel.text = "\(movie.name ?? "No value") '\(movie.year?.description ?? " ")'"
         // Подставить код для загрузки изображения фильма
         // Например: picture.image = UIImage(named: movie.imageName)
         // Или использовать Kingfisher, AlamofireImage и т.д. для загрузки из сети
