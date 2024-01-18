@@ -59,7 +59,8 @@ final class RandomMovieView: UIView {
         
         private let picture: UIImageView = {
             let picture = UIImageView()
-            picture.image = UIImage(named: "изображение по умолчанию")
+            picture.layer.cornerRadius = 20
+//            picture.image = UIImage(named: "изображение по умолчанию")
             picture.contentMode = .scaleAspectFill
             picture.translatesAutoresizingMaskIntoConstraints = false
             return picture
@@ -102,12 +103,12 @@ final class RandomMovieView: UIView {
             NSLayoutConstraint(item: textLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             NSLayoutConstraint(item: textLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             
-            NSLayoutConstraint(item: picture, attribute: .top, relatedBy: .equal, toItem: textLabel, attribute: .topMargin, multiplier: 1.0, constant: 50.0).isActive = true
-            NSLayoutConstraint(item: picture, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 200.0).isActive = true
-            NSLayoutConstraint(item: picture, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 200.0).isActive = true
+            NSLayoutConstraint(item: picture, attribute: .top, relatedBy: .equal, toItem: textLabel, attribute: .topMargin, multiplier: 1.0, constant: 100.0).isActive = true
+            NSLayoutConstraint(item: picture, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 280.0).isActive = true
+            NSLayoutConstraint(item: picture, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 280.0).isActive = true
             NSLayoutConstraint(item: picture, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0.0).isActive = true
             
-            NSLayoutConstraint(item: nameMovieLabel, attribute: .bottom, relatedBy: .equal, toItem: picture, attribute: .bottomMargin, multiplier: 1.0, constant: 30.0).isActive = true
+            NSLayoutConstraint(item: nameMovieLabel, attribute: .bottom, relatedBy: .equal, toItem: picture, attribute: .bottomMargin, multiplier: 1.0, constant: 100.0).isActive = true
             NSLayoutConstraint(item: nameMovieLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             NSLayoutConstraint(item: nameMovieLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             
@@ -117,23 +118,19 @@ final class RandomMovieView: UIView {
         }
     
     
-    // TODO: - Доделать
-    private func getImage() {
-      
-        }
-
-    
      func updateUIWithMovie() {
          guard let movie = movie else {
             print("Ошибка: объект фильма не инициализирован")
             return
-        }
+         }
          print("Обновление UI с информацией о фильме: \(movie.name ?? "No value")")
-         nameMovieLabel.text = "\(movie.name ?? "No value") '\(movie.year?.description ?? " ")'"
-        // Подставить код для загрузки изображения фильма
-        // Например: picture.image = UIImage(named: movie.imageName)
-        // Или использовать Kingfisher, AlamofireImage и т.д. для загрузки из сети
-        picture.image = UIImage(named: "изображение по умолчанию")
+         DispatchQueue.main.async { [weak self] in
+            self?.nameMovieLabel.text = "\(movie.name ?? "No value"). '\(movie.year?.description ?? " ")'"
+             guard let imageUrlString = movie.poster?.previewUrl,
+                   let imageURL = URL(string: imageUrlString),
+                   let imageData = try? Data(contentsOf: imageURL) else { return }
+             self?.picture.image = UIImage(data: imageData)
+         }
     }
 }
 

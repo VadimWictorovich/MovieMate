@@ -128,7 +128,7 @@ final class HomeTVController: UITableViewController {
     }
     
     private func showRandomMovieView() {
-        randomMovie.frame.size = CGSize(width: 320, height: 400)
+        randomMovie.frame.size = CGSize(width: 320, height: 600)
         randomMovie.center.x = view.center.x
         randomMovie.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
         view.addSubview(randomMovie)
@@ -139,8 +139,8 @@ final class HomeTVController: UITableViewController {
     }
     
     private func getRandomMovie() {
-       let queue = DispatchQueue.global(qos: .utility)
-       queue.async {
+//       let queue = DispatchQueue.global(qos: .utility)
+//       queue.async {
            NetworkService.fetchRandomMovie { [weak self] result, error in
                if let error = error {
                    print("Ошибка при получении данных: \(error)")
@@ -151,15 +151,23 @@ final class HomeTVController: UITableViewController {
                    return
                }
                print("Получен случайный фильм: \(result.name)")
-               DispatchQueue.main.async { [weak self] in
-                   self?.showRandomMovieView()
-                   self?.randomMovie.movie = result
-                   self?.randomMovie.updateUIWithMovie()
-                   self?.stopActivityAnimation()
-               }
+//               DispatchQueue.main.async { [weak self] in
+//                   self?.showRandomMovieView()
+//                   self?.randomMovie.movie = result
+//                   self?.randomMovie.updateUIWithMovie()
+//                   self?.stopActivityAnimation()
+//               }
+               self.showRandomMovieView()
+               self.randomMovie.movie = result
+               self.randomMovie.updateUIWithMovie()
+               self.stopActivityAnimation()
            }
-       }
+//       }
    }
+    
+    
+    
+    
     
     // MARK: Objs methods
     @objc func closeSearchView() {

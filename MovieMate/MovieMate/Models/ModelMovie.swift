@@ -5,7 +5,7 @@
 //  Created by Вадим Игнатенко on 11.12.23.
 //
 
-import Foundation
+import UIKit
 
 
 // Структура для внешнего идентификатора фильма
