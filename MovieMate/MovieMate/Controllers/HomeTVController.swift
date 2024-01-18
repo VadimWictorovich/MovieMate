@@ -96,7 +96,8 @@ final class HomeTVController: UITableViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case .thirdButName:
-                showRandomMovieView()
+            startActivityAnimation(message: "Загрузка...", type: .ballScaleMultiple, color: .white, textColor: .white)
+            getRandomMovie()
         case .fourthButName:
             let sb = UIStoryboard(name: "Main", bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
@@ -125,6 +126,29 @@ final class HomeTVController: UITableViewController {
         }
     }
     
+    private func getRandomMovie() {
+       let queue = DispatchQueue.global(qos: .utility)
+       queue.async {
+           NetworkService.fetchRandomMovie { [weak self] result, error in
+               if let error = error {
+                   print("Ошибка при получении данных: \(error)")
+                   return
+               }
+               guard let self, let result = result else {
+                   print("Ошибка: получены некорректные данные")
+                   return
+               }
+               print("Получен случайный фильм: \(result.name)")
+               DispatchQueue.main.async { [weak self] in
+                   self?.showRandomMovieView()
+                   self?.randomMovie.movie = result
+                   self?.randomMovie.updateUIWithMovie()
+                   self?.stopActivityAnimation()
+               }
+           }
+       }
+   }
+    
     @objc func closeSearchView() {
         searchView.removeFromSuperview()
     }
@@ -134,7 +158,8 @@ final class HomeTVController: UITableViewController {
     }
     
     @objc func showRandomMovie() {
-        randomMovie.getRandomMovie()
+        getRandomMovie()
+        startActivityAnimation(message: "Загрузка...", type: .ballScaleMultiple, color: .white, textColor: .white)
     }
 }
 

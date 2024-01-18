@@ -9,7 +9,7 @@ import UIKit
 
 final class RandomMovieView: UIView {
     
-        private var movie: MovieDetail?
+        var movie: MovieDetail?
             
         private let nameMovieLabel: UILabel = {
             let lab = UILabel()
@@ -68,8 +68,6 @@ final class RandomMovieView: UIView {
         
         override init(frame: CGRect) {
             super.init(frame: frame)
-            
-            getRandomMovie()
             configure()
             setupConstrains()
         }
@@ -146,41 +144,21 @@ final class RandomMovieView: UIView {
 //            picture.image = UIImage(named: "изображение по умолчанию")
 //        }
     
-     func getRandomMovie() {
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async {
-            NetworkService.fetchRandomMovie { [weak self] result, error in
-                if let error = error {
-                    print("Ошибка при получении данных: \(error)")
-                    return
-                }
-                guard let self, let result = result else {
-                    print("Ошибка: получены некорректные данные")
-                    return
-                }
-                print("Получен случайный фильм: \(result.name)")
-                DispatchQueue.main.async {
-                    self.movie = result
-                    self.updateUIWithMovie()
-                }
-            }
-        }
-    }
-    
     
     // TODO: - Доделать
     private func getImage() {
       
         }
 
-    private func updateUIWithMovie() {
+    
+     func updateUIWithMovie() {
         guard let movie = movie else {
             print("Ошибка: объект фильма не инициализирован")
             return
         }
         print("Обновление UI с информацией о фильме: \(movie.name)")
         nameMovieLabel.text = movie.name
-        // Подставьте свой код для загрузки изображения фильма
+        // Подставить код для загрузки изображения фильма
         // Например: picture.image = UIImage(named: movie.imageName)
         // Или использовать Kingfisher, AlamofireImage и т.д. для загрузки из сети
         picture.image = UIImage(named: "изображение по умолчанию")
