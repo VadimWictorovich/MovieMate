@@ -7,9 +7,12 @@
 
 import UIKit
 
+
 final class RandomMovieView: UIView {
     
+        weak var delegate: PushToVC?
         var movie: MovieDetail?
+    
             
         private let nameMovieLabel: UILabel = {
             let lab = UILabel()
@@ -57,11 +60,12 @@ final class RandomMovieView: UIView {
         }()
     
         
-        private let picture: UIImageView = {
+        private lazy var picture: UIImageView = {
             let picture = UIImageView()
-            picture.layer.cornerRadius = 20
-//            picture.image = UIImage(named: "изображение по умолчанию")
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openDetailVC))
             picture.contentMode = .scaleAspectFill
+            picture.addGestureRecognizer(tapGesture)
+            picture.isUserInteractionEnabled = true
             picture.translatesAutoresizingMaskIntoConstraints = false
             return picture
         }()
@@ -120,17 +124,31 @@ final class RandomMovieView: UIView {
     
      func updateUIWithMovie() {
          guard let movie = movie else {
-            print("Ошибка: объект фильма не инициализирован")
+            print("Ошибка в методе updateUIWithMovie: объект фильма не инициализирован")
             return
          }
          print("Обновление UI с информацией о фильме: \(movie.name ?? "No value")")
          DispatchQueue.main.async { [weak self] in
             self?.nameMovieLabel.text = "\(movie.name ?? "No value"). '\(movie.year?.description ?? " ")'"
-             guard let imageUrlString = movie.poster?.previewUrl,
-                   let imageURL = URL(string: imageUrlString),
-                   let imageData = try? Data(contentsOf: imageURL) else { return }
-             self?.picture.image = UIImage(data: imageData)
-         }
+            guard let imageUrlString = movie.poster?.previewUrl,
+                  let imageURL = URL(string: imageUrlString) else { return }
+            NetworkService.fetchMovieImage(imageURL: imageURL) { result, error in
+            if let error {
+                print("возникла ошибка в методе updateUIWithMovie при получении изображения: \(error)")
+                return
+            }
+                guard let result else { return }
+                DispatchQueue.main.async { [weak self] in
+                    self?.picture.image = result
+
+                }
+            }
+        }
     }
+    
+    @objc func openDetailVC() {
+        delegate?.openDetailVC(at: nil)
+    }
+
 }
 

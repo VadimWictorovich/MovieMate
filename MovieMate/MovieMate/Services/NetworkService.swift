@@ -87,7 +87,7 @@ class NetworkService {
         }
     }
     
-    static func fetchMovieImage (imageURL: String, callback: @escaping (_ result: UIImage?, _ error: Error?) -> ()) {
+    static func fetchMovieImage (imageURL: URL, callback: @escaping (_ result: UIImage?, _ error: Error?) -> ()) {
         AF.request(imageURL).responseImage { response in
             switch response.result {
                 case .success(let image):

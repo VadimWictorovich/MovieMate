@@ -32,7 +32,7 @@ final class HomeTVController: UITableViewController {
     private let sectionNamed = NameSection.allCases
     private lazy var searchView = SeatchByWordsView()
     private lazy var randomMovie = RandomMovieView()
-//    private var openView: Bool?
+    //    private var openView: Bool?
     
     
     // MARK: Lifecycle VC
@@ -41,7 +41,7 @@ final class HomeTVController: UITableViewController {
         tableView.register(BestMoviesInYearTVCell.self, forCellReuseIdentifier: "cellInCollection1")
         tableView.register(AllTimeTVCell.self, forCellReuseIdentifier: "cellInCollection2")
     }
-
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         sectionNamed.count
@@ -54,7 +54,7 @@ final class HomeTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch sectionNamed[section] {
         case .rootSection:
@@ -65,7 +65,7 @@ final class HomeTVController: UITableViewController {
             return 1
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sectionNamed[indexPath.section] {
         case .rootSection:
@@ -131,42 +131,40 @@ final class HomeTVController: UITableViewController {
         randomMovie.frame.size = CGSize(width: 320, height: 600)
         randomMovie.center.x = view.center.x
         randomMovie.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
+        randomMovie.delegate = self
         view.addSubview(randomMovie)
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
             self?.randomMovie.transform = .identity
-//            self?.openView = true
+            //            self?.openView = true
         }
     }
     
     private func getRandomMovie() {
-//       let queue = DispatchQueue.global(qos: .utility)
-//       queue.async {
-           NetworkService.fetchRandomMovie { [weak self] result, error in
-               if let error = error {
-                   print("Ошибка при получении данных: \(error)")
-                   return
-               }
-               guard let self, let result = result else {
-                   print("Ошибка: получены некорректные данные")
-                   return
-               }
-               print("Получен случайный фильм: \(result.name)")
-//               DispatchQueue.main.async { [weak self] in
-//                   self?.showRandomMovieView()
-//                   self?.randomMovie.movie = result
-//                   self?.randomMovie.updateUIWithMovie()
-//                   self?.stopActivityAnimation()
-//               }
-               self.showRandomMovieView()
-               self.randomMovie.movie = result
-               self.randomMovie.updateUIWithMovie()
-               self.stopActivityAnimation()
-           }
-//       }
-   }
-    
-    
-    
+        //       let queue = DispatchQueue.global(qos: .utility)
+        //       queue.async {
+        NetworkService.fetchRandomMovie { [weak self] result, error in
+            if let error = error {
+                print("Ошибка при получении данных: \(error)")
+                return
+            }
+            guard let self, let result = result else {
+                print("Ошибка: получены некорректные данные")
+                return
+            }
+            print("Получен случайный фильм: \(result.name)")
+            //               DispatchQueue.main.async { [weak self] in
+            //                   self?.showRandomMovieView()
+            //                   self?.randomMovie.movie = result
+            //                   self?.randomMovie.updateUIWithMovie()
+            //                   self?.stopActivityAnimation()
+            //               }
+            self.showRandomMovieView()
+            self.randomMovie.movie = result
+            self.randomMovie.updateUIWithMovie()
+            self.stopActivityAnimation()
+        }
+        //       }
+    }
     
     
     // MARK: Objs methods
@@ -175,7 +173,7 @@ final class HomeTVController: UITableViewController {
     }
     
     @objc func closeRandomMovieView() {
-//        openView = false
+        //        openView = false
         randomMovie.removeFromSuperview()
     }
     
@@ -183,12 +181,14 @@ final class HomeTVController: UITableViewController {
         getRandomMovie()
         startActivityAnimation()
     }
+
 }
 
 
 // MARK: - Extentions VC
 extension HomeTVController: PushToVC {
-    func didSelectCell(at indexPath: IndexPath) {
+    
+    func openDetailVC(at indexPath: IndexPath?) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
             navigationController?.pushViewController(vc, animated: true)
