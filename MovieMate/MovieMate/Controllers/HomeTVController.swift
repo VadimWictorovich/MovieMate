@@ -140,30 +140,21 @@ final class HomeTVController: UITableViewController {
     }
     
     private func getRandomMovie() {
-        //       let queue = DispatchQueue.global(qos: .utility)
-        //       queue.async {
         NetworkService.fetchRandomMovie { [weak self] result, error in
             if let error = error {
-                print("Ошибка при получении данных: \(error)")
+                print("Ошибка при получении данных в методе getRandomMovie: \(error)")
                 return
             }
-            guard let self, let result = result else {
+            guard let self, let result else {
                 print("Ошибка: получены некорректные данные")
                 return
             }
             print("Получен случайный фильм: \(result.name)")
-            //               DispatchQueue.main.async { [weak self] in
-            //                   self?.showRandomMovieView()
-            //                   self?.randomMovie.movie = result
-            //                   self?.randomMovie.updateUIWithMovie()
-            //                   self?.stopActivityAnimation()
-            //               }
             self.showRandomMovieView()
             self.randomMovie.movie = result
             self.randomMovie.updateUIWithMovie()
             self.stopActivityAnimation()
         }
-        //       }
     }
     
     

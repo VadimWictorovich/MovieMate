@@ -39,7 +39,7 @@ final class BestMoviesInYearTVCell: UITableViewCell {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-        getMovie()
+        getId()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -50,45 +50,52 @@ final class BestMoviesInYearTVCell: UITableViewCell {
 extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        moviesId.count
+        movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? BestMoviesInYearCVCell,
-              movies.isEmpty else { return UICollectionViewCell() }
-        print("moviesId------------\(moviesId.count)")
-        print("movies------------\(movies.count)")
-//        let movie = movies[indexPath.row]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell1", for: indexPath) as? BestMoviesInYearCVCell else { return UICollectionViewCell() }
+        let movie = movies[indexPath.row]
         cell.backgroundColor = .black
         cell.layer.cornerRadius = 10
         cell.imageView.image = UIImage(named: "изображение по умолчанию")
-        cell.label.text = "Название фильма"
+        cell.label.text = movie.name ?? "Название фильма"
         cell.label.textColor = .white
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 150, height: 190)
+        return CGSize(width: 150, height: 190)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.openDetailVC(at: indexPath)
     }
     
-    private func getMovieId() {
-        NetworkService.fetchMovie2023 { [weak self] result, _ in
-            guard let result else { return }
-            self?.moviesId = result.docs
-            self?.collectionView.reloadData()
+    private func getId() {
+        NetworkService.fetchMovie2023 { [weak self] result,error in
+            if let error {
+                print("====в методе getMovieId класса BestMoviesInYearTVCell получена ошибка: \(error)")
+            } else if let result {
+                print("====в методе getMovieId класса BestMoviesInYearTVCell получен result: \(result)")
+                self?.moviesId = result.docs
+                self?.collectionView.reloadData()
+                self?.getMovie()
             }
         }
+    }
     
     private func getMovie() {
-        getMovieId()
+        
         moviesId.forEach { value in
-            NetworkService.fetchMovieById(movieId: value.id) { [weak self] result, _ in
-                guard let result else { return }
-                self?.movies.append(result)
+            NetworkService.fetchMovieById(movieId: value.id) { [weak self] result, error in
+                if let error {
+                    print("=====в методе getMovie класса BestMoviesInYearTVCell получена ошибка: \(error)")
+                } else if let result {
+                    print("=====в методе getMovie класса BestMoviesInYearTVCell получен result: \(result)")
+                    self?.movies.append(result)
+                    self?.collectionView.reloadData()
+                }
             }
         }
     }

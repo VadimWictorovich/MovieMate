@@ -10,6 +10,7 @@ import UIKit
 
 final class RandomMovieView: UIView {
     
+        private lazy var detailVC = DetailVC()
         weak var delegate: PushToVC?
         var movie: MovieDetail?
     
@@ -103,7 +104,7 @@ final class RandomMovieView: UIView {
             NSLayoutConstraint(item: closeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0).isActive = true
             NSLayoutConstraint(item: closeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0).isActive = true
             
-            NSLayoutConstraint(item: textLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: 25.0).isActive = true
+            NSLayoutConstraint(item: textLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: 30.0).isActive = true
             NSLayoutConstraint(item: textLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             NSLayoutConstraint(item: textLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 6.0).isActive = true
             
@@ -123,7 +124,7 @@ final class RandomMovieView: UIView {
     
     
      func updateUIWithMovie() {
-         guard let movie = movie else {
+         guard let movie else {
             print("Ошибка в методе updateUIWithMovie: объект фильма не инициализирован")
             return
          }
@@ -147,6 +148,7 @@ final class RandomMovieView: UIView {
     }
     
     @objc func openDetailVC() {
+        detailVC.movie = movie
         delegate?.openDetailVC(at: nil)
     }
 
