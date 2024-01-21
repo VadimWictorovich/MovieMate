@@ -13,7 +13,7 @@ import SwiftyJSON
 class NetworkService {
     
     static func fetchMovie2023(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=2&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=5&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -28,6 +28,31 @@ class NetworkService {
                         value = try JSONDecoder().decode(MovieIdsResponse.self, from: data)
                     } catch (let decodError) {
                         print("в методе fetchMovie2023 класса NetworkService при декодировании получена ошибка:\(decodError)")
+                    }
+                case .failure(let error):
+                    err = error
+                }
+                callback(value, err)
+            }
+    }
+    
+    
+    static func fetchBestMovieOfAllTime(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=5&selectFields=id&notNullFields&type=movie&lists=top250"
+        let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
+            .response { response in
+                var value: MovieIdsResponse?
+                var err: Error?
+                switch response.result {
+                case .success(let data):
+                    guard let data else { callback (value, err)
+                        return }
+                    print("у метода fetchBestMovieOfAllTime класса NetworkService получена data \(JSON(data))")
+                    do {
+                        value = try JSONDecoder().decode(MovieIdsResponse.self, from: data)
+                    } catch (let decodError) {
+                        print("в методе fetchBestMovieOfAllTime класса NetworkService при декодировании получена ошибка:\(decodError)")
                     }
                 case .failure(let error):
                     err = error

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 protocol PushToVC: AnyObject {
     func openDetailVC(at indexPath: IndexPath?)
@@ -14,9 +16,10 @@ protocol PushToVC: AnyObject {
 final class BestMoviesInYearTVCell: UITableViewCell {
     
     private var collectionView: UICollectionView!
+    private var moviesId: [MovieId] = []
+    private var movies: [MovieDetail] = []
     weak var delegate: PushToVC?
-    var moviesId: [MovieId] = []
-    var movies: [MovieDetail] = []
+
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,9 +61,24 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
         let movie = movies[indexPath.row]
         cell.backgroundColor = .black
         cell.layer.cornerRadius = 10
-        cell.imageView.image = UIImage(named: "изображение по умолчанию")
         cell.label.text = movie.name ?? "Название фильма"
         cell.label.textColor = .white
+        DispatchQueue.main.async {
+            guard let urlString = movie.poster?.previewUrl, let url = URL(string: urlString) else {
+                print ("в методе cellForItemAtIndexPath класса BestMoviesInYearTVCell не получена urlImage")
+                return
+            }
+            NetworkService.fetchMovieImage(imageURL: url) { result, error in
+                if let error {
+                    print("в методе cellForItemAtIndexPath класса BestMoviesInYearTVCell получена ошибка: \(error)")
+                } else if let result {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = result
+                        cell.setNeedsLayout()
+                    }
+                }
+            }
+        }
         return cell
     }
     
