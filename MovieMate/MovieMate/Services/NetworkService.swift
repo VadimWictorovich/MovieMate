@@ -156,7 +156,7 @@ class NetworkService {
     
     // MARK: - Test methods
     static func fetchMovieByWord ( callback: @escaping (_ result: MovieByWord?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=3&query=паук"
+        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=3&query=мстители"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
