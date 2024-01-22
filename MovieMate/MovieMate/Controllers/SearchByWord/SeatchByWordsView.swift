@@ -8,6 +8,9 @@
 import UIKit
 
 final class SeatchByWordsView: UIView {
+    
+    private lazy var listOfTheMovie = ListOfTheMovieTVC()
+    weak var delegate: PushToVC?
 
     private let textLabel: UILabel = {
         let label = UILabel()
@@ -103,15 +106,12 @@ final class SeatchByWordsView: UIView {
     // TODO: - Доработать этот код
     // test methods
     @objc private func seatchMovieAction() {
-        NetworkService.fetchMovieByWord { result, error in
-            if let error {
-                print ("в методе seatchMovieAction получен error: \(error)")
-            } else if let result {
-                print ("в методе seatchMovieAction получен фильм : \(result.docs.isEmpty)")
-                // result is Empty
-            }
-        }
+        guard let word = textField.text, !word.isEmpty else { return }
+        listOfTheMovie.word = word
+        delegate?.openVC(at: nil, identifier: "ListOfTheMovieTVC")
     }
+}
+    
     
 
-}
+

@@ -29,6 +29,7 @@ struct Person: Codable {
 // Структура для представления жанра
 struct Genre: Codable {
     let name: String?
+    let slug: String?
 }
 
 // Структура для представления рейтинга
@@ -57,6 +58,14 @@ struct MovieIdsResponse: Codable {
     let limit: Int?
     let page: Int?
     let pages: Int?
+}
+
+struct MovieByWord: Codable {
+    let pages: Int?
+    let total: Int?
+    let page: Int?
+    let docs: [MovieDetail]
+    let limit: Int?
 }
 
 // Главная структура для представления фильма

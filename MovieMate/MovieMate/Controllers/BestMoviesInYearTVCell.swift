@@ -9,9 +9,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-protocol PushToVC: AnyObject {
-    func openDetailVC(at indexPath: IndexPath?)
-}
+
 
 final class BestMoviesInYearTVCell: UITableViewCell {
     
@@ -87,7 +85,7 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.openDetailVC(at: indexPath)
+        delegate?.openVC(at: indexPath, identifier: "DetailVC")
     }
     
     private func getId() {

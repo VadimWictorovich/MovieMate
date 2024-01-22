@@ -149,7 +149,7 @@ final class RandomMovieView: UIView {
     
     @objc func openDetailVC() {
         detailVC.movie = movie
-        delegate?.openDetailVC(at: nil)
+        delegate?.openVC(at: nil, identifier: "DetailVC")
     }
 
 }

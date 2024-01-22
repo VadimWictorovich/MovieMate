@@ -32,6 +32,7 @@ final class HomeTVController: UITableViewController {
     private let sectionNamed = NameSection.allCases
     private lazy var searchView = SeatchByWordsView()
     private lazy var randomMovie = RandomMovieView()
+    private lazy var genresList = GenresListTVController()
     //    private var openView: Bool?
     
     
@@ -101,7 +102,8 @@ final class HomeTVController: UITableViewController {
             showSearchView()
         case .secondButName:
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+            if let vc = sb.instantiateViewController(withIdentifier: "GenresListTVController") as? GenresListTVController {
+                vc.navigationItem.title = "Жанры"
                 navigationController?.pushViewController(vc, animated: true)
             }
         case .thirdButName:
@@ -121,6 +123,7 @@ final class HomeTVController: UITableViewController {
         searchView.frame.size = CGSize(width: 320, height: 250)
         searchView.center.x = view.center.x
         searchView.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
+        searchView.delegate = self
         view.addSubview(searchView)
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
             self?.searchView.transform = .identity
@@ -140,23 +143,23 @@ final class HomeTVController: UITableViewController {
     }
     
     private func getRandomMovie() {
-        NetworkService.fetchRandomMovie { [weak self] result, error in
+        NetworkService.fetchRandomMovie { result, error in
             if let error = error {
-                print("Ошибка при получении данных в методе getRandomMovie: \(error)")
+                print("* * * * Ошибка при получении данных в методе getRandomMovie: \(error) * * *")
                 return
+            } else if let result {
+                print("* * * * Получен случайный фильм: \(result.name) * * *")
+                DispatchQueue.main.async { [weak self] in
+                    self?.showRandomMovieView()
+                    self?.randomMovie.movie = result
+                    self?.randomMovie.updateUIWithMovie()
+                    self?.stopActivityAnimation()
+                }
             }
-            guard let self, let result else {
-                print("Ошибка: получены некорректные данные")
-                return
-            }
-            print("Получен случайный фильм: \(result.name)")
-            self.showRandomMovieView()
-            self.randomMovie.movie = result
-            self.randomMovie.updateUIWithMovie()
-            self.stopActivityAnimation()
+            print("* * * * Ошибка: получены некорректные данные в методе getRandomMovie * * *")
         }
     }
-    
+        
     
     // MARK: Objs methods
     @objc func closeSearchView() {
@@ -178,12 +181,10 @@ final class HomeTVController: UITableViewController {
 
 // MARK: - Extentions VC
 extension HomeTVController: PushToVC {
-    
-    func openDetailVC(at indexPath: IndexPath?) {
+    func openVC(at indexPath: IndexPath?, identifier: String) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        let vc = sb.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

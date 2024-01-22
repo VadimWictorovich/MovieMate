@@ -13,7 +13,7 @@ import SwiftyJSON
 class NetworkService {
     
     static func fetchMovie2023(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=5&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -38,7 +38,7 @@ class NetworkService {
     
     
     static func fetchBestMovieOfAllTime(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=5&selectFields=id&notNullFields&type=movie&lists=top250"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&selectFields=id&notNullFields&type=movie&lists=top250"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -60,6 +60,35 @@ class NetworkService {
                 callback(value, err)
             }
     }
+    
+    
+    static func fetchGenresList(callback: @escaping (_ result: [Genre]?, _ error: Error?) -> ()) {
+        let url = "https://api.kinopoisk.dev/v1/movie/possible-values-by-field?field=genres.name"
+        let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
+            .response { response in
+                var value: [Genre]?
+                var err: Error?
+                switch response.result {
+                case .success(let data):
+                    guard let data else {
+                        callback (value, err)
+                        return
+                    }
+                    print("у метода fetchGenresList класса NetworkService получена data \(JSON(data))")
+                    do {
+                        value = try JSONDecoder().decode([Genre].self, from: data)
+                    } catch (let decodError) {
+                        print("в методе fetchGenresList класса NetworkService при декодировании получена ошибка:\(decodError)")
+                    }
+                case .failure(let error):
+                    err = error
+                }
+                callback(value, err)
+            }
+    }
+    
+    
     
     static func fetchMovieById (movieId: Int, callback: @escaping (_ result: MovieDetail?, _ error: Error?) -> ()) {
         let url = "https://api.kinopoisk.dev/v1.4/movie/\(String(movieId))"
@@ -126,13 +155,12 @@ class NetworkService {
     }
     
     // MARK: - Test methods
-    static func fetchMovieByWord ( callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/keyword?page=1&limit=10&title=паук"
-//        let url = URL(string: "https://api.kinopoisk.dev/v1.4/keyword?page=1&limit=10&title=паук")
+    static func fetchMovieByWord ( callback: @escaping (_ result: MovieByWord?, _ error: Error?) -> ()) {
+        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=3&query=паук"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
-                var movieIdResp: MovieIdsResponse?
+                var movieIdResp: MovieByWord?
                 var err: Error?
                 switch response.result {
                 case .success(let data):
@@ -141,7 +169,7 @@ class NetworkService {
                         return }
                     print("у метода fetchMovieByWord получена data \(JSON(data))")
                     do {
-                        movieIdResp = try JSONDecoder().decode(MovieIdsResponse.self, from: data)
+                        movieIdResp = try JSONDecoder().decode(MovieByWord.self, from: data)
                     } catch (let decodError) {
                         print("у метода fetchMovieByWord получен decodError--------------------\(decodError)")
                     }

@@ -79,7 +79,7 @@ extension AllTimeTVCell: UICollectionViewDataSource, UICollectionViewDelegate, U
     }
     
     private func getId() {
-        NetworkService.fetchMovie2023 { [weak self] result,error in
+        NetworkService.fetchBestMovieOfAllTime { [weak self] result, error in
             if let error {
                 print("====в методе getMovieId класса AllTimeTVCell получена ошибка: \(error)")
             } else if let result {

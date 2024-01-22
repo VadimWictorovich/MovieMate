@@ -8,6 +8,8 @@
 import UIKit
 
 class ListOfTheMovieTVC: UITableViewController {
+    
+    var word: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,10 @@ class ListOfTheMovieTVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellList", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellList", for: indexPath) as? MovieListTVCell 
+        else { return UITableViewCell() }
+        
+        
         return cell
     }
     
@@ -31,6 +36,16 @@ class ListOfTheMovieTVC: UITableViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
             navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func getValue() {
+        NetworkService.fetchMovieByWord { result, error in
+            if let error {
+                print("* * * * В методе getValue класса ListOfTheMovieTVC получена ошибка: \(error) * * *")
+            } else if let result {
+                print("* * * * В методе getValue класса ListOfTheMovieTVC получен result: \(result) * * *")
+            }
         }
     }
 }
