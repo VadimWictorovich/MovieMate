@@ -13,7 +13,7 @@ import SwiftyJSON
 class NetworkService {
     
     static func fetchMovie2023(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=7&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -23,7 +23,7 @@ class NetworkService {
                 case .success(let data):
                     guard let data else { callback (value, err)
                         return }
-                    print("у метода fetchMovie2023 класса NetworkService получена data \(JSON(data))")
+//                    print("у метода fetchMovie2023 класса NetworkService получена data \(JSON(data))")
                     do {
                         value = try JSONDecoder().decode(MovieIdsResponse.self, from: data)
                     } catch (let decodError) {
@@ -38,7 +38,7 @@ class NetworkService {
     
     
     static func fetchBestMovieOfAllTime(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&selectFields=id&notNullFields&type=movie&lists=top250"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=7&selectFields=id&notNullFields&type=movie&lists=top250"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -48,7 +48,7 @@ class NetworkService {
                 case .success(let data):
                     guard let data else { callback (value, err)
                         return }
-                    print("у метода fetchBestMovieOfAllTime класса NetworkService получена data \(JSON(data))")
+//                    print("у метода fetchBestMovieOfAllTime класса NetworkService получена data \(JSON(data))")
                     do {
                         value = try JSONDecoder().decode(MovieIdsResponse.self, from: data)
                     } catch (let decodError) {
@@ -75,7 +75,7 @@ class NetworkService {
                         callback (value, err)
                         return
                     }
-                    print("у метода fetchGenresList класса NetworkService получена data \(JSON(data))")
+//                    print("у метода fetchGenresList класса NetworkService получена data \(JSON(data))")
                     do {
                         value = try JSONDecoder().decode([Genre].self, from: data)
                     } catch (let decodError) {
@@ -102,7 +102,7 @@ class NetworkService {
                     guard let data else {
                         callback(movie, err)
                         return }
-                    print("у метода fetchMovieById класса NetworkService получена data \(JSON(data))")
+//                    print("у метода fetchMovieById класса NetworkService получена data \(JSON(data))")
                     do {
                         movie = try JSONDecoder().decode(MovieDetail.self, from: data)
                     } catch (let decodError) {
@@ -134,7 +134,7 @@ class NetworkService {
                     do {
                         movie = try JSONDecoder().decode(MovieDetail.self, from: data)
                     } catch (let decodError) {
-                        print("Error decoding response data: \(decodError)")
+//                        print("Error decoding response data: \(decodError)")
                     }
                 case .failure(let error):
                     err = error
@@ -178,7 +178,5 @@ class NetworkService {
                 }
                 callback(movieIdResp, err)
             }
-
-
     }
 }
