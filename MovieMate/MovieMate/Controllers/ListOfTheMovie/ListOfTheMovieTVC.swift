@@ -42,7 +42,8 @@ class ListOfTheMovieTVC: UITableViewController {
     }
     
     private func getValue() {
-        NetworkService.fetchMovieByWord { [weak self] result, error in
+        guard let word else { return }
+        NetworkService.fetchMovieByWord(word: word) { [weak self] result, error in
             if let error {
                 print("* * * * В методе getValue класса ListOfTheMovieTVC получена ошибка: \(error) * * *")
             }

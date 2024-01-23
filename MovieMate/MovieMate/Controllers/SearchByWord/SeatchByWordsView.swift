@@ -106,8 +106,8 @@ final class SeatchByWordsView: UIView {
     // TODO: - Доработать этот код
     // test methods
     @objc private func seatchMovieAction() {
-//        guard let word = textField.text, !word.isEmpty else { return }
-//        listOfTheMovie.word = word
+        guard let word = textField.text, !word.isEmpty else { return }
+        listOfTheMovie.word = word
         delegate?.openVC(at: nil, identifier: "ListOfTheMovieTVC")
     }
 }
