@@ -17,7 +17,7 @@ final class BestMoviesInYearTVCell: UITableViewCell {
     private var collectionView: UICollectionView!
     private var moviesId: [MovieId] = []
     private var movies: [MovieDetail] = []
-    weak var delegate: PushToVC?
+    weak var delegate: DelegateGoToMovieDetail?
 
     
     
@@ -86,7 +86,8 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.openVC(at: indexPath, identifier: "DetailVC")
+        let movie = movies[indexPath.row]
+        delegate?.openVCMovieDetail(at: indexPath, detail: movie, movieId: nil)
     }
     
     private func getId() {

@@ -150,6 +150,5 @@ final class RandomMovieView: UIView {
         guard let movie else { return }
         delegate?.openVCMovieDetail(at: nil, detail: movie, movieId: nil)
     }
-
 }
 
