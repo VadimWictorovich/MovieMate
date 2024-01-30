@@ -185,6 +185,8 @@ extension HomeTVController: PushToVC, DelegateGoToListMovieDetail, DelegateGoToM
     func openVCMovieDetail(at indexPath: IndexPath?, detail: MovieDetail?, movieId: Int?) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
+            vc.movie = detail
+            vc.movieId = movieId
             navigationController?.pushViewController(vc, animated: true)
         }
     }

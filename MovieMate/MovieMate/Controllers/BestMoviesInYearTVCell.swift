@@ -13,6 +13,7 @@ import AlamofireImage
 
 final class BestMoviesInYearTVCell: UITableViewCell {
     
+    // MARK: Properties
     private var collectionView: UICollectionView!
     private var moviesId: [MovieId] = []
     private var movies: [MovieDetail] = []

@@ -9,15 +9,17 @@ import UIKit
 
 class GenresListTVController: UITableViewController {
     
+    
     var genres: [Genre] = []
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getGenresList()
     }
 
+    
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         genres.count
     }
@@ -29,6 +31,8 @@ class GenresListTVController: UITableViewController {
         return cell
     }
     
+    
+    // MARK: - Function
     private func getGenresList() {
         NetworkService.fetchGenresList { result, error in
             if let error {

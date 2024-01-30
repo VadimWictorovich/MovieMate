@@ -10,6 +10,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
+
 class NetworkService {
     
     static func fetchMovie2023(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
@@ -143,6 +144,8 @@ class NetworkService {
             }
     }
     
+    
+    // MARK: - Fetch image movie
     static func fetchMovieImage (imageURL: URL, callback: @escaping (_ result: UIImage?, _ error: Error?) -> ()) {
         AF.request(imageURL).responseImage { response in
             switch response.result {
@@ -154,9 +157,10 @@ class NetworkService {
         }
     }
     
-    // MARK: - Test methods
+    
+    // MARK: - Search movie by word
     static func fetchMovieByWord (words: String, callback: @escaping (_ result: MovieByWord?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=7&query=\(words)"
+        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=3&query=\(words)"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in

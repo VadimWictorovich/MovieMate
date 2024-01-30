@@ -10,8 +10,7 @@ import UIKit
 
 final class RandomMovieView: UIView {
     
-        private lazy var detailVC = DetailVC()
-        weak var delegate: PushToVC?
+        weak var delegate: DelegateGoToMovieDetail?
         var movie: MovieDetail?
     
             
@@ -148,8 +147,8 @@ final class RandomMovieView: UIView {
     }
     
     @objc func openDetailVC() {
-        detailVC.movie = movie
-        delegate?.openVC(at: nil, identifier: "DetailVC")
+        guard let movie else { return }
+        delegate?.openVCMovieDetail(at: nil, detail: movie, movieId: nil)
     }
 
 }
