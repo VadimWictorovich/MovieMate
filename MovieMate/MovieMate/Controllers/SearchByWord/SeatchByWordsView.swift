@@ -9,9 +9,8 @@ import UIKit
 
 final class SeatchByWordsView: UIView {
     
-    private lazy var listOfTheMovie = ListOfTheMovieTVC()
-    weak var delegate: PushToVC?
-
+    weak var delegate: DelegateGoToListMovieDetail?
+    
     private let textLabel: UILabel = {
         let label = UILabel()
         label.text = "Введите ключевое слово, по которому будет осуществлен поиск"
@@ -63,7 +62,7 @@ final class SeatchByWordsView: UIView {
         configure()
         setupConstrains()
     }
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -107,8 +106,14 @@ final class SeatchByWordsView: UIView {
     // test methods
     @objc private func seatchMovieAction() {
         guard let word = textField.text, !word.isEmpty else { return }
-        listOfTheMovie.word = word
-        delegate?.openVC(at: nil, identifier: "ListOfTheMovieTVC")
+        NetworkService.fetchMovieByWord(words: word) { [weak self] result, error in
+            if let error {
+                print("* * * * В методе seatchMovieAction класса SeatchByWordsView получена ошибка: \(error) * * *")
+            }
+            guard let result, let self else { return }
+            print("* * * * В методе seatchMovieAction класса SeatchByWordsView получен result: \(result) * * *")
+            self.delegate?.openTVCListMovies(list: result.docs)
+        }
     }
 }
     

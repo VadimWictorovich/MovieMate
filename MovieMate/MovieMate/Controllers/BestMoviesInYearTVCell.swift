@@ -93,7 +93,7 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
             if let error {
                 print("====в методе getMovieId класса BestMoviesInYearTVCell получена ошибка: \(error)")
             } else if let result {
-                print("====в методе getMovieId класса BestMoviesInYearTVCell получен result: \(result)")
+//                print("====в методе getMovieId класса BestMoviesInYearTVCell получен result: \(result)")
                 self?.moviesId = result.docs
                 self?.collectionView.reloadData()
                 self?.getMovie()
@@ -108,7 +108,7 @@ extension BestMoviesInYearTVCell: UICollectionViewDataSource, UICollectionViewDe
                 if let error {
                     print("=====в методе getMovie класса BestMoviesInYearTVCell получена ошибка: \(error)")
                 } else if let result {
-                    print("=====в методе getMovie класса BestMoviesInYearTVCell получен result: \(result)")
+//                    print("=====в методе getMovie класса BestMoviesInYearTVCell получен result: \(result)")
                     self?.movies.append(result)
                     self?.collectionView.reloadData()
                 }

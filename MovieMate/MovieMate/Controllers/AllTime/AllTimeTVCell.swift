@@ -12,6 +12,8 @@ final class AllTimeTVCell: UITableViewCell {
     private var collectionView: UICollectionView!
     private var moviesId: [MovieId] = []
     private var movies: [MovieDetail] = []
+    weak var delegate: DelegateGoToMovieDetail?
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,7 +54,6 @@ extension AllTimeTVCell: UICollectionViewDataSource, UICollectionViewDelegate, U
         let movie = movies[indexPath.row]
         cell.backgroundColor = .black
         cell.layer.cornerRadius = 10
-//        cell.imageView.image = UIImage(named: "изображение по умолчанию")
         cell.label.text = movie.name ?? "Название фильма"
         cell.label.textColor = .white
         DispatchQueue.main.async {
@@ -78,12 +79,17 @@ extension AllTimeTVCell: UICollectionViewDataSource, UICollectionViewDelegate, U
             return CGSize(width: 150, height: 190)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        delegate?.openVCMovieDetail(at: indexPath, detail: movie, movieId: nil)
+    }
+    
     private func getId() {
         NetworkService.fetchBestMovieOfAllTime { [weak self] result, error in
             if let error {
                 print("====в методе getMovieId класса AllTimeTVCell получена ошибка: \(error)")
             } else if let result {
-                print("====в методе getMovieId класса AllTimeTVCell получен result: \(result)")
+//                print("====в методе getMovieId класса AllTimeTVCell получен result: \(result)")
                 self?.moviesId = result.docs
                 self?.collectionView.reloadData()
                 self?.getMovie()
@@ -98,7 +104,7 @@ extension AllTimeTVCell: UICollectionViewDataSource, UICollectionViewDelegate, U
                 if let error {
                     print("=====в методе getMovie класса AllTimeTVCell получена ошибка: \(error)")
                 } else if let result {
-                    print("=====в методе getMovie класса AllTimeTVCell получен result: \(result)")
+//                    print("=====в методе getMovie класса AllTimeTVCell получен result: \(result)")
                     self?.movies.append(result)
                     self?.collectionView.reloadData()
                 }

@@ -81,6 +81,7 @@ final class HomeTVController: UITableViewController {
             return cell
         case .bestAllTimeSection:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInCollection2", for: indexPath) as? AllTimeTVCell else { return UITableViewCell() }
+            cell.delegate = self
             return cell
         }
     }
@@ -175,12 +176,28 @@ final class HomeTVController: UITableViewController {
         getRandomMovie()
         startActivityAnimation()
     }
-
 }
 
 
 // MARK: - Extentions VC
-extension HomeTVController: PushToVC {
+extension HomeTVController: PushToVC, DelegateGoToListMovieDetail, DelegateGoToMovieDetail {
+    
+    func openVCMovieDetail(at indexPath: IndexPath?, detail: MovieDetail?, movieId: Int?) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func openTVCListMovies(list: [MovieDetail]) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+            vc.movieList = list
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
     func openVC(at indexPath: IndexPath?, identifier: String) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: identifier)
