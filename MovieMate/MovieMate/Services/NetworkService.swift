@@ -183,4 +183,30 @@ class NetworkService {
                 callback(movieIdResp, err)
             }
     }
+    
+    
+    static func fetchMovieByGenresName (genresName: String, callback: @escaping (_ result: MovieByWord?, _ error: Error?) -> ()) {
+        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=3&query=\(genresName)"
+        let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
+            .response { response in
+                var movieList: MovieByWord?
+                var err: Error?
+                switch response.result {
+                case .success(let data):
+                    guard let data else {
+                        callback(movieList, err)
+                        return }
+                    print("у метода fetchMovieByWord получена data \(JSON(data))")
+                    do {
+                        movieList = try JSONDecoder().decode(MovieByWord.self, from: data)
+                    } catch (let decodError) {
+                        print("у метода fetchMovieByWord получен decodError--------------------\(decodError)")
+                    }
+                case .failure(let error):
+                    err = error
+                }
+                callback(movieList, err)
+            }
+    }
 }

@@ -31,6 +31,23 @@ class GenresListTVController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let genre = genres[indexPath.row]
+        guard let genreName = genre.name else { return }
+        NetworkService.fetchMovieByGenresName(genresName: genreName) { [weak self] result, error in
+            if let error {
+                print("в методе didSelectRowAt класса GenresListTVController получена ошибка: \(error)")
+            } else if let result, let self {
+                print("в методе didSelectRowAt класса GenresListTVController получен result: \(result)")
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                    vc.movieList = result.docs
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+    
     
     // MARK: - Function
     private func getGenresList() {
