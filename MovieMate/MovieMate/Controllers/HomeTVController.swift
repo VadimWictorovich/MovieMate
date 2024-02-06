@@ -102,6 +102,7 @@ final class HomeTVController: UITableViewController {
         case .firstButName:
             showSearchView()
         case .secondButName:
+            startActivityAnimation()
             let sb = UIStoryboard(name: "Main", bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "GenresListTVController") as? GenresListTVController {
                 vc.navigationItem.title = "Жанры"
@@ -123,11 +124,12 @@ final class HomeTVController: UITableViewController {
         searchView.center.x = view.center.x
         searchView.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
         searchView.delegate = self
+        searchView.delegateClosed = self
         view.addSubview(searchView)
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
             self?.searchView.transform = .identity
         }
-        }
+    }
     
     private func showRandomMovieView() {
         blurEffect()
@@ -135,6 +137,7 @@ final class HomeTVController: UITableViewController {
         randomMovie.center.x = view.center.x
         randomMovie.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
         randomMovie.delegate = self
+        randomMovie.delegateClosed = self
         view.addSubview(randomMovie)
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
             self?.randomMovie.transform = .identity
@@ -205,7 +208,13 @@ final class HomeTVController: UITableViewController {
 
 
 // MARK: - Extentions VC
-extension HomeTVController: PushToVC, DelegateGoToListMovieDetail, DelegateGoToMovieDetail {
+extension HomeTVController: PushToVC, DelegateGoToListMovieDetail, DelegateGoToMovieDetail, DelegateClosedView {
+    func closedView() {
+        searchView.removeFromSuperview()
+        randomMovie.removeFromSuperview()
+        cancelBlurEffect()
+    }
+    
     
     func openVCMovieDetail(at indexPath: IndexPath?, detail: MovieDetail?, movieId: Int?) {
         let sb = UIStoryboard(name: "Main", bundle: nil)

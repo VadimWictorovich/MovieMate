@@ -59,6 +59,7 @@ class GenresListTVController: UITableViewController {
                 print("* * * * Получен массив жанров: \(result) * * *")
                 self.genres = result
                 self.tableView.reloadData()
+                self.stopActivityAnimation()
         }
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 final class SeatchByWordsView: UIView {
     
     weak var delegate: DelegateGoToListMovieDetail?
+    weak var delegateClosed: DelegateClosedView?
     
     private let textLabel: UILabel = {
         let label = UILabel()
@@ -25,11 +26,15 @@ final class SeatchByWordsView: UIView {
     
     private let textField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Введите слово"
         tf.textColor = .black
         tf.backgroundColor = .white
         tf.layer.cornerRadius = 10
         tf.translatesAutoresizingMaskIntoConstraints = false
+        let placeholderColor: UIColor = {
+            return .lightGray
+        }()
+        let placeholderText = NSAttributedString(string: "Введите название", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        tf.attributedPlaceholder = placeholderText
         return tf
     }()
     
@@ -112,6 +117,7 @@ final class SeatchByWordsView: UIView {
             }
             guard let result, let self else { return }
             print("* * * * В методе seatchMovieAction класса SeatchByWordsView получен result: \(result) * * *")
+            self.delegateClosed?.closedView()
             self.delegate?.openTVCListMovies(list: result.docs)
         }
     }

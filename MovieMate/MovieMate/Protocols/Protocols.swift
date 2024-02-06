@@ -20,4 +20,8 @@ protocol DelegateGoToMovieDetail: AnyObject {
     func openVCMovieDetail(at indexPath: IndexPath?, detail: MovieDetail?, movieId: Int?)
 }
 
+protocol DelegateClosedView: AnyObject {
+    func closedView ()
+}
+
 
