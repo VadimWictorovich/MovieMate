@@ -8,7 +8,9 @@
 import UIKit
 
 final class SeatchByWordsView: UIView {
-
+    
+    weak var delegate: DelegateGoToListMovieDetail?
+    
     private let textLabel: UILabel = {
         let label = UILabel()
         label.text = "Введите ключевое слово, по которому будет осуществлен поиск"
@@ -60,7 +62,7 @@ final class SeatchByWordsView: UIView {
         configure()
         setupConstrains()
     }
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -86,7 +88,7 @@ final class SeatchByWordsView: UIView {
         NSLayoutConstraint(item: closeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0).isActive = true
         NSLayoutConstraint(item: closeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0).isActive = true
         
-        NSLayoutConstraint(item: textLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: 180.0).isActive = true
+        NSLayoutConstraint(item: textLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: 50.0).isActive = true
         NSLayoutConstraint(item: textLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 6.0).isActive = true
         NSLayoutConstraint(item: textLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 6.0).isActive = true
         
@@ -100,10 +102,21 @@ final class SeatchByWordsView: UIView {
         NSLayoutConstraint(item: seatchButton, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1.0, constant: 30.0).isActive = true
     }
     
-    
+    // TODO: - Доработать этот код
+    // test methods
     @objc private func seatchMovieAction() {
-        
+        guard let word = textField.text, !word.isEmpty else { return }
+        NetworkService.fetchMovieByWord(words: word) { [weak self] result, error in
+            if let error {
+                print("* * * * В методе seatchMovieAction класса SeatchByWordsView получена ошибка: \(error) * * *")
+            }
+            guard let result, let self else { return }
+            print("* * * * В методе seatchMovieAction класса SeatchByWordsView получен result: \(result) * * *")
+            self.delegate?.openTVCListMovies(list: result.docs)
+        }
     }
+}
+    
     
 
-}
+
