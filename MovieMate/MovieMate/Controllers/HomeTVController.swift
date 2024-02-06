@@ -30,11 +30,11 @@ final class HomeTVController: UITableViewController {
     // MARK: Properties
     private let buttonNamed = NameCellAction.allCases
     private let sectionNamed = NameSection.allCases
+    private let blurEf = UIBlurEffect(style: .regular)
     private lazy var searchView = SeatchByWordsView()
     private lazy var randomMovie = RandomMovieView()
     private lazy var genresList = GenresListTVController()
-    //    private var openView: Bool?
-    
+    private lazy var blurEfVeiw = UIVisualEffectView(effect: blurEf)
     
     // MARK: Lifecycle VC
     override func viewDidLoad() {
@@ -111,16 +111,14 @@ final class HomeTVController: UITableViewController {
             startActivityAnimation()
             getRandomMovie()
         case .fourthButName:
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
-                navigationController?.pushViewController(vc, animated: true)
-            }
+            goPremiereMovie()
         }
     }
     
     
     // MARK: - Methods
     private func showSearchView() {
+        blurEffect()
         searchView.frame.size = CGSize(width: 320, height: 250)
         searchView.center.x = view.center.x
         searchView.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
@@ -129,9 +127,10 @@ final class HomeTVController: UITableViewController {
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
             self?.searchView.transform = .identity
         }
-    }
+        }
     
     private func showRandomMovieView() {
+        blurEffect()
         randomMovie.frame.size = CGSize(width: 320, height: 600)
         randomMovie.center.x = view.center.x
         randomMovie.transform = CGAffineTransform(scaleX: 3.9, y: 0.2)
@@ -139,7 +138,6 @@ final class HomeTVController: UITableViewController {
         view.addSubview(randomMovie)
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0) { [weak self] in
             self?.randomMovie.transform = .identity
-            //            self?.openView = true
         }
     }
     
@@ -160,16 +158,43 @@ final class HomeTVController: UITableViewController {
             print("* * * * Ошибка: получены некорректные данные в методе getRandomMovie * * *")
         }
     }
-        
+    
+    
+    private func goPremiereMovie() {
+        NetworkService.fetchMoviePrimere { [weak self] result, error in
+            if let error = error {
+                print("* * * * Ошибка при получении данных в методе getRandomMovie: \(error) * * *")
+                return
+            } else if let result, let self {
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "ListOfTheMovieTVC") as? ListOfTheMovieTVC {
+                    vc.movieList = result.docs
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+    
+    private func blurEffect() {
+        blurEfVeiw.frame = view.bounds
+        view.addSubview(blurEfVeiw)
+    }
+    
+    
+    private func cancelBlurEffect() {
+        blurEfVeiw.removeFromSuperview()
+    }
+                                         
     
     // MARK: Objs methods
     @objc func closeSearchView() {
         searchView.removeFromSuperview()
+        cancelBlurEffect()
     }
     
     @objc func closeRandomMovieView() {
-        //        openView = false
         randomMovie.removeFromSuperview()
+        cancelBlurEffect()
     }
     
     @objc func showRandomMovie() {
