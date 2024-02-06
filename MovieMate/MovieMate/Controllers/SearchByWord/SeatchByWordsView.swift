@@ -26,11 +26,15 @@ final class SeatchByWordsView: UIView {
     
     private let textField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Введите слово"
         tf.textColor = .black
         tf.backgroundColor = .white
         tf.layer.cornerRadius = 10
         tf.translatesAutoresizingMaskIntoConstraints = false
+        let placeholderColor: UIColor = {
+            return .lightGray
+        }()
+        let placeholderText = NSAttributedString(string: "Введите название", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        tf.attributedPlaceholder = placeholderText
         return tf
     }()
     

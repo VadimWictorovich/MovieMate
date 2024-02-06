@@ -102,6 +102,7 @@ final class HomeTVController: UITableViewController {
         case .firstButName:
             showSearchView()
         case .secondButName:
+            startActivityAnimation()
             let sb = UIStoryboard(name: "Main", bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "GenresListTVController") as? GenresListTVController {
                 vc.navigationItem.title = "Жанры"
@@ -117,7 +118,7 @@ final class HomeTVController: UITableViewController {
     
     
     // MARK: - Methods
-    func showSearchView() {
+    private func showSearchView() {
         blurEffect()
         searchView.frame.size = CGSize(width: 320, height: 250)
         searchView.center.x = view.center.x

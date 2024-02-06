@@ -32,6 +32,7 @@ final class DetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        startActivityAnimation()
         setupUI()
     }
     
@@ -78,6 +79,7 @@ final class DetailVC: UIViewController {
                 return
             } else if let result, let self {
                 self.imageView.image = result
+                self.stopActivityAnimation()
             }
         }
     }
