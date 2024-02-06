@@ -11,6 +11,7 @@ import UIKit
 final class RandomMovieView: UIView {
     
         weak var delegate: DelegateGoToMovieDetail?
+        weak var delegateClosed: DelegateClosedView?
         var movie: MovieDetail?
     
             
@@ -148,6 +149,7 @@ final class RandomMovieView: UIView {
     
     @objc func openDetailVC() {
         guard let movie else { return }
+        delegateClosed?.closedView()
         delegate?.openVCMovieDetail(at: nil, detail: movie, movieId: nil)
     }
 }

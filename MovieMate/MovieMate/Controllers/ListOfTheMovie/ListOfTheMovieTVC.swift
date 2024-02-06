@@ -11,7 +11,10 @@ class ListOfTheMovieTVC: UITableViewController {
     
     var movieList: [MovieDetail] = []
     
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
     // MARK: - Table view data source
     
     
@@ -25,7 +28,8 @@ class ListOfTheMovieTVC: UITableViewController {
         else { return UITableViewCell() }
         let movie = movieList[indexPath.row]
         cell.nameMovieLabel.text = (movie.name ?? "Нет данных") + " " + (movie.year?.description ?? " ")
-        cell.descriptionMovielabel.text = movie.slogan
+        cell.ratingMovieLabel.text = "Рейтинг: \(String(format: "%.1f", movie.rating?.kp ?? "0.0")) (kp)"
+        cell.descriptionMovielabel.text = "\(movie.ageRating?.description ?? "6")+"
         DispatchQueue.main.async {
             guard let urlString = movie.poster?.previewUrl, let url = URL(string: urlString) else {
                 print ("в методе cellForItemAtIndexPath класса ListOfTheMovieTVC не получена urlImage")
@@ -42,7 +46,6 @@ class ListOfTheMovieTVC: UITableViewController {
                 }
             }
         }
-
         return cell
     }
     
@@ -56,5 +59,17 @@ class ListOfTheMovieTVC: UITableViewController {
         }
     }
     
+    
+    private func setupUI() {
+        navigationItem.title = "Список фильмов"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "house.circle.fill"), style: .plain, target: self, action: #selector(goToRootVC))
+        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2740662098, green: 0.8547341824, blue: 0.7583532929, alpha: 1)
+        
+    }
+    
+    
+    @objc func goToRootVC() {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
 
