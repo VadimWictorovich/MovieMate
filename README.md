@@ -41,7 +41,7 @@ ___
 
 ---
 <p align="center">
-      <img src="https://photos.app.goo.gl/LbDncdwxavwv4cNX8" width="300"> <img src="https://photos.app.goo.gl/QLx2PofUBJ3Y4xQC8" width="300"> <img src="https://photos.app.goo.gl/VhEKFndwe6b23GFo6" width="300">
+      <img src="https://github.com/VadimWictorovich/MovieMate/blob/dev/MovieMate/MovieMate/Assets.xcassets/g2.dataset/g2.gif" width="300"> <img src="https://github.com/VadimWictorovich/MovieMate/blob/dev/MovieMate/MovieMate/Assets.xcassets/g1.dataset/g1.gif" width="300"> <img src="https://github.com/VadimWictorovich/MovieMate/blob/dev/MovieMate/MovieMate/Assets.xcassets/g3.dataset/g3.gif" width="300">
 </p>
 
 #### Contact with me
