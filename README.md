@@ -6,7 +6,7 @@
 MovieMate дает возможность каждому пользователю получить следующие сведения о фильме:
 - год выпуска;
 - оригинальное название;
-- узнать рейтинг на различных сервисахс (IMDb, TMDB, kinopoisk и иные);
+- узнать рейтинг на различных сервисах (IMDb, TMDB, kinopoisk и иные);
 - возрастной рейтинг;
 - продолжительность;
 - жанр;
@@ -40,7 +40,9 @@ ___
 
 
 ---
-
+<p align="center">
+      <img src="https://photos.app.goo.gl/LbDncdwxavwv4cNX8" width="300"> <img src="https://photos.app.goo.gl/QLx2PofUBJ3Y4xQC8" width="300"> <img src="https://photos.app.goo.gl/VhEKFndwe6b23GFo6" width="300">
+</p>
 
 #### Contact with me
 [Email](mailto:vadim.wictorowich@gmail.com "vadim.wictorowich@gmail.com")

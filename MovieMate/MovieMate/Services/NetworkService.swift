@@ -14,7 +14,7 @@ import SwiftyJSON
 class NetworkService {
     
     static func fetchMovie2023(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=15&selectFields=id&notNullFields=&type=movie&typeNumber=1&year=2023"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -39,7 +39,7 @@ class NetworkService {
     
     
     static func fetchBestMovieOfAllTime(callback: @escaping (_ result: MovieIdsResponse?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&selectFields=id&notNullFields&type=movie&lists=top250"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=15&selectFields=id&notNullFields&type=movie&lists=top250"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -160,7 +160,7 @@ class NetworkService {
     
     // MARK: - Search movie by word
     static func fetchMovieByWord (words: String, callback: @escaping (_ result: MovieByWord?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=1&query=\(words)"
+        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=10&query=\(words)"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -186,7 +186,7 @@ class NetworkService {
     
     
     static func fetchMovieByGenresName (genresName: String, callback: @escaping (_ result: MovieByWord?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=1&query=\(genresName)"
+        let url = "https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=10&query=\(genresName)"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
@@ -213,7 +213,7 @@ class NetworkService {
     
     // не работает
     static func fetchMoviePrimere (callback: @escaping (_ result: MovieByWord?, _ error: Error?) -> ()) {
-        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&premiere.world=01.10.2023-31.01.2024"
+        let url = "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=8&premiere.world=01.10.2023-31.01.2024"
         let header: HTTPHeaders = ["X-API-KEY": ModelAPIConstans.apiKey]
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
             .response { response in
