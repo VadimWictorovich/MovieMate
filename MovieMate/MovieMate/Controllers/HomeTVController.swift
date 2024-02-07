@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyOnboard
 
 
 // MARK: - ENUMS
@@ -24,10 +25,12 @@ enum NameCellAction: String, CaseIterable {
 
 
 // MARK: - ViewController
+
 final class HomeTVController: UITableViewController {
     
     
     // MARK: Properties
+    
     private let buttonNamed = NameCellAction.allCases
     private let sectionNamed = NameSection.allCases
     private let blurEf = UIBlurEffect(style: .regular)
@@ -36,14 +39,17 @@ final class HomeTVController: UITableViewController {
     private lazy var genresList = GenresListTVController()
     private lazy var blurEfVeiw = UIVisualEffectView(effect: blurEf)
     
-    // MARK: Lifecycle VC
+    // MARK: - Lifecycle VC
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        showOnbord()
         tableView.register(BestMoviesInYearTVCell.self, forCellReuseIdentifier: "cellInCollection1")
         tableView.register(AllTimeTVCell.self, forCellReuseIdentifier: "cellInCollection2")
     }
     
     // MARK: - Table view data source
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         sectionNamed.count
     }
@@ -187,6 +193,13 @@ final class HomeTVController: UITableViewController {
     private func cancelBlurEffect() {
         blurEfVeiw.removeFromSuperview()
     }
+    
+    private func showOnbord() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "OnboardVC") as? OnboardVC {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
                                          
     
     // MARK: Objs methods
@@ -240,6 +253,7 @@ extension HomeTVController: PushToVC, DelegateGoToListMovieDetail, DelegateGoToM
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+
 
 
 

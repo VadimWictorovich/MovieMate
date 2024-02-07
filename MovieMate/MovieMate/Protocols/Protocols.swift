@@ -24,4 +24,10 @@ protocol DelegateClosedView: AnyObject {
     func closedView ()
 }
 
+protocol ClosedOnbording: AnyObject {
+    func closeOnbord()
+}
+
+
+
 
