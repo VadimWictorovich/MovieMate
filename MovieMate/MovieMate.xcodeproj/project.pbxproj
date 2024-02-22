@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E353D34C8D634B7652DA5B0 /* Pods_MovieMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDFAA5A81EBEF391212E827 /* Pods_MovieMate.framework */; };
 		6C4873FE2B5EE41500B008AB /* GenresListTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4873FD2B5EE41500B008AB /* GenresListTVController.swift */; };
 		6C4874002B5EFD8000B008AB /* MovieListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4873FF2B5EFD8000B008AB /* MovieListTVCell.swift */; };
 		6C4874032B5F060700B008AB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4874022B5F060700B008AB /* Protocols.swift */; };
@@ -19,6 +20,8 @@
 		6C98B0592B13C6180068030B /* BestMoviesInYearTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98B0582B13C6180068030B /* BestMoviesInYearTVCell.swift */; };
 		6C98B05E2B1519CD0068030B /* BestMoviesInYearCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98B05C2B1519CD0068030B /* BestMoviesInYearCVCell.swift */; };
 		6C98B05F2B1519CD0068030B /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C98B05D2B1519CD0068030B /* CollectionViewCell.xib */; };
+		6C9CAE152B72DB0900064628 /* OnboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9CAE142B72DB0900064628 /* OnboardVC.swift */; };
+		6C9CAE182B73B4F600064628 /* OnbordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9CAE172B73B4F600064628 /* OnbordingView.swift */; };
 		6CAF95EF2B2666AA0075837F /* ModelAPIConstans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF95EE2B2666AA0075837F /* ModelAPIConstans.swift */; };
 		6CAF95F12B2679BF0075837F /* ModelMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF95F02B2679BF0075837F /* ModelMovie.swift */; };
 		6CAF95F92B2685940075837F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF95F82B2685940075837F /* NetworkService.swift */; };
@@ -38,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		082C175ACC7FF2014D7931C2 /* Pods-MovieMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieMate.release.xcconfig"; path = "Target Support Files/Pods-MovieMate/Pods-MovieMate.release.xcconfig"; sourceTree = "<group>"; };
 		6C4873FD2B5EE41500B008AB /* GenresListTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresListTVController.swift; sourceTree = "<group>"; };
 		6C4873FF2B5EFD8000B008AB /* MovieListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTVCell.swift; sourceTree = "<group>"; };
 		6C4874022B5F060700B008AB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 		6C98B0582B13C6180068030B /* BestMoviesInYearTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestMoviesInYearTVCell.swift; sourceTree = "<group>"; };
 		6C98B05C2B1519CD0068030B /* BestMoviesInYearCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestMoviesInYearCVCell.swift; sourceTree = "<group>"; };
 		6C98B05D2B1519CD0068030B /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		6C9CAE142B72DB0900064628 /* OnboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardVC.swift; sourceTree = "<group>"; };
+		6C9CAE172B73B4F600064628 /* OnbordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingView.swift; sourceTree = "<group>"; };
 		6CAF95EE2B2666AA0075837F /* ModelAPIConstans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAPIConstans.swift; sourceTree = "<group>"; };
 		6CAF95F02B2679BF0075837F /* ModelMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMovie.swift; sourceTree = "<group>"; };
 		6CAF95F82B2685940075837F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -63,6 +69,8 @@
 		6CCA99632B09324100E4A975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CCA99662B09324100E4A975 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CCA99682B09324100E4A975 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BDFAA5A81EBEF391212E827 /* Pods_MovieMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEED1DAE902E1C1DFD3F3B7F /* Pods-MovieMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieMate.debug.xcconfig"; path = "Target Support Files/Pods-MovieMate/Pods-MovieMate.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +83,7 @@
 				6CAF95FC2B2686300075837F /* Alamofire in Frameworks */,
 				6CB0CA422B57F3C100448038 /* AlamofireImage in Frameworks */,
 				6CB0CA472B59180100448038 /* NVActivityIndicatorViewExtended in Frameworks */,
+				3E353D34C8D634B7652DA5B0 /* Pods_MovieMate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +102,7 @@
 		6C1BAB9C2B0B926300C32EFA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6C9CAE162B73B4CC00064628 /* Onbording */,
 				6C4873FC2B5EE3A500B008AB /* GenresList */,
 				6C6BC3992B0BEDD80032860C /* SearchByWord */,
 				6CB0C91B2B4FCBBD00448038 /* ListOfTheMovie */,
@@ -165,6 +175,15 @@
 			path = AllTime;
 			sourceTree = "<group>";
 		};
+		6C9CAE162B73B4CC00064628 /* Onbording */ = {
+			isa = PBXGroup;
+			children = (
+				6C9CAE142B72DB0900064628 /* OnboardVC.swift */,
+				6C9CAE172B73B4F600064628 /* OnbordingView.swift */,
+			);
+			path = Onbording;
+			sourceTree = "<group>";
+		};
 		6CB0C91B2B4FCBBD00448038 /* ListOfTheMovie */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +214,8 @@
 			children = (
 				6CCA99592B09323A00E4A975 /* MovieMate */,
 				6CCA99582B09323A00E4A975 /* Products */,
+				F93EBB7B366DB754201359B9 /* Pods */,
+				75883D3DE85925A4A4CF7F61 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -232,6 +253,23 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
+		75883D3DE85925A4A4CF7F61 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8BDFAA5A81EBEF391212E827 /* Pods_MovieMate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F93EBB7B366DB754201359B9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EEED1DAE902E1C1DFD3F3B7F /* Pods-MovieMate.debug.xcconfig */,
+				082C175ACC7FF2014D7931C2 /* Pods-MovieMate.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,9 +277,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6CCA996B2B09324100E4A975 /* Build configuration list for PBXNativeTarget "MovieMate" */;
 			buildPhases = (
+				9B55BAE560DA4F253BCB3398 /* [CP] Check Pods Manifest.lock */,
 				6CCA99532B09323A00E4A975 /* Sources */,
 				6CCA99542B09323A00E4A975 /* Frameworks */,
 				6CCA99552B09323A00E4A975 /* Resources */,
+				0AFFEAD4FC713EFDE0DD782F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -313,6 +353,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0AFFEAD4FC713EFDE0DD782F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieMate/Pods-MovieMate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieMate/Pods-MovieMate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieMate/Pods-MovieMate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B55BAE560DA4F253BCB3398 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MovieMate-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6CCA99532B09323A00E4A975 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -328,6 +410,8 @@
 				6C4873FE2B5EE41500B008AB /* GenresListTVController.swift in Sources */,
 				6CAF95EF2B2666AA0075837F /* ModelAPIConstans.swift in Sources */,
 				6C7028EA2B15CFB400581F4E /* AllTimeCVCell.swift in Sources */,
+				6C9CAE152B72DB0900064628 /* OnboardVC.swift in Sources */,
+				6C9CAE182B73B4F600064628 /* OnbordingView.swift in Sources */,
 				6C98B0592B13C6180068030B /* BestMoviesInYearTVCell.swift in Sources */,
 				6C66E7502B49BD3A00135FAA /* SeatchByWordsView.swift in Sources */,
 				6CAF95F92B2685940075837F /* NetworkService.swift in Sources */,
@@ -477,6 +561,7 @@
 		};
 		6CCA996C2B09324100E4A975 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEED1DAE902E1C1DFD3F3B7F /* Pods-MovieMate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -505,6 +590,7 @@
 		};
 		6CCA996D2B09324100E4A975 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 082C175ACC7FF2014D7931C2 /* Pods-MovieMate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
